@@ -2,9 +2,11 @@ package com.example.driver_1.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.MainThread;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.driver_1.R;
+import com.example.driver_1.data.loggedInDriver.MainActivity;
 import com.example.driver_1.ui.login.LoginViewModel;
 import com.example.driver_1.ui.login.LoginViewModelFactory;
 
@@ -122,10 +125,17 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClick(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
