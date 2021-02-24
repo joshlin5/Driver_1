@@ -3,19 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginActivity">
+    app:startDestination="@id/nav_home">
 
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.driver_1.data.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.driver_1.data.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.driver_1.data.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.driver_1.ui.login.LoginActivity"
         android:label="activity_login"
-        tools:layout="@layout/activity_login" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.driver_1.data.loggedInDriver.MainActivity"
-        android:label="activity_main" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.driver_1.SettingsFragment"
-        android:label="SettingsFragment" />
+        app:action="@string/action_sign_in"
+        tools:layout="@layout/activity_login"/>
+
 </navigation>
