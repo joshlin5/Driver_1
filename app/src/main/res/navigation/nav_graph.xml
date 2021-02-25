@@ -7,25 +7,30 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.driver_1.data.home.HomeFragment"
+        android:name="com.example.driver_1.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.driver_1.data.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.example.driver_1.ui.sponsor.SponsorFragment"
+        android:label="@string/menu_sponsor"
+        tools:layout="@layout/fragment_sponsor" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.driver_1.data.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.driver_1.ui.store.StoreFragment"
+        android:label="@string/menu_store"
+        tools:layout="@layout/fragment_store" />
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.driver_1.ui.login.LoginActivity"
         android:label="activity_login"
         app:action="@string/action_sign_in"
         tools:layout="@layout/activity_login"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.driver_1.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

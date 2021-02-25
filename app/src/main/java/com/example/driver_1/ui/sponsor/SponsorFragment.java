@@ -1,4 +1,4 @@
-package com.example.driver_1.data.home;
+package com.example.driver_1.ui.sponsor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,20 +14,20 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.driver_1.R;
 
-public class HomeFragment extends Fragment {
+public class SponsorFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private SponsorViewModel sponsorViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.username);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        sponsorViewModel =
+                new ViewModelProvider(this).get(SponsorViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_sponsor, container, false);
+        final TextView textView = root.findViewById(R.id.text_sponsor);
+        sponsorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //textView.setText(s);
+                textView.setText(s);
             }
         });
         return root;

@@ -1,16 +1,16 @@
-package com.example.driver_1.data.home;
+package com.example.driver_1.ui.store;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class StoreViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public StoreViewModel() {
         mText = new MutableLiveData<>();
-        //mText.setValue("This is home fragment");
+        mText.setValue("This is store fragment");
     }
 
     public LiveData<String> getText() {
