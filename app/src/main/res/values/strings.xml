@@ -33,4 +33,14 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="usernameString">Username: John Smith</string>
+    <string name="sponsorString">Sponsor: Example</string>
+    <string name="pointString">Points: 100</string>
+    <string name="resetPasswordString">Reset Password</string>
+    <string name="birthdayString">January 1, 2000</string>
+    <string name="genderString">Male</string>
+    <string name="emailString">Email: example@gmail.com</string>
+    <string name="phoneNumberString">Phone Number: 111-111-1111</string>
+    <string name="addressString">Address: 148 Example Dr. 11111 Charleston, SC</string>
+    <string name="editProfileString">Edit Profile</string>
 </resources>
