@@ -1,4 +1,4 @@
-package com.example.driver_1.data.home;
+package com.example.driver_1.ui.home;
 
 import android.view.View;
 

@@ -1,4 +1,4 @@
-package com.example.driver_1.data.gallery;
+package com.example.driver_1.ui.sponsor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.driver_1.R;
 
-public class GalleryFragment extends Fragment {
+public class SponsorFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private SponsorViewModel sponsorViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        sponsorViewModel =
+                new ViewModelProvider(this).get(SponsorViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_sponsor, container, false);
+        final TextView textView = root.findViewById(R.id.text_sponsor);
+        sponsorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
