@@ -50,4 +50,8 @@
     <string name="birthdayTextView">Birthday:</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="genderTextView">Gender:</string>
+    <string name="menu_sponsor">This is the sponsor page</string>
+    <string name="menu_store">This is the store page</string>
+    <string name="menu_settings">This is the settings page</string>
+    <string name="settings">This is the settings page</string>
 </resources>
