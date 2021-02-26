@@ -7,6 +7,18 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/editProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:text="@string/edit_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/usernameTextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,10 +81,10 @@
         android:textSize="20sp"
         android:hint="@string/genderTextView"
         app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
-        app:layout_constraintBottom_toTopOf="@id/resetPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <TextView
+    <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +94,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/usernameTextView"
         app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
 
-    <TextView
+    <EditText
         android:id="@+id/addressEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +104,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
         app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
 
-    <TextView
+    <EditText
         android:id="@+id/phoneNumberEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +114,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
 
-    <TextView
+    <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,7 +124,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
         app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
 
-    <TextView
+    <EditText
         android:id="@+id/birthdayEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,7 +134,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/birthdayTextView"
         app:layout_constraintLeft_toRightOf="@id/birthdayTextView"/>
 
-    <TextView
+    <EditText
         android:id="@+id/genderEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -131,28 +143,4 @@
         android:hint="@string/genderString"
         app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
         app:layout_constraintLeft_toRightOf="@id/genderTextView"/>
-
-    <Button
-        android:id="@+id/resetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="@string/resetPasswordString"
-        app:layout_constraintTop_toBottomOf="@id/genderTextView"
-        app:layout_constraintBottom_toTopOf="@id/editProfile"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <Button
-        android:id="@+id/editProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="@string/editProfileString"
-        app:layout_constraintTop_toBottomOf="@id/resetPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
