@@ -17,14 +17,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.driver_1.R;
 
 public class EditProfileFragment extends DialogFragment {
-    public interface EditProfileListener {
-        // Callback for "OK" button
-        void onEditProfileDialogPositiveClick(String username, String address, String phoneNumber, String email, String birthday, String gender);
-        // Callback for "Cancel" button
-        void onEditProfileDialogNegativeClick();
-    }
-
-    EditProfileListener listener;
     // The EditText for the Dialog
     EditText username, address, phoneNumber, email, birthday, gender;
 
@@ -57,29 +49,20 @@ public class EditProfileFragment extends DialogFragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onEditProfileDialogPositiveClick(username.getText().toString(), address.getText().toString(), phoneNumber.getText().toString(), email.getText().toString(), birthday.getText().toString(), gender.getText().toString());
+                        Bundle result = new Bundle();
+                        result.putString("username", username.getText().toString());
+                        result.putString("address", address.getText().toString());
+                        result.putString("phoneNumber", phoneNumber.getText().toString());
+                        result.putString("email", email.getText().toString());
+                        result.putString("birthday", birthday.getText().toString());
+                        result.putString("gender", gender.getText().toString());
+                        getParentFragmentManager().setFragmentResult("requestKey", result);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onEditProfileDialogNegativeClick();
                     }
                 });
         return builder.create();
-    }
-
-    /**
-     *
-     * @param context Interface to global information about an application environment
-     * @pre
-     * context = NULL or context = [some data]
-     * @post
-     * [listener will be attached to context]
-     */
-    // Inspired from Zybooks
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        listener = (EditProfileListener) context;
     }
 }

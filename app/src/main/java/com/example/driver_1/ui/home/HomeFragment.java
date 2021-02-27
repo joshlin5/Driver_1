@@ -10,35 +10,43 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.driver_1.R;
 
-public class HomeFragment extends Fragment implements EditProfileFragment.EditProfileListener{
+public class HomeFragment extends Fragment{
 
     private HomeViewModel homeViewModel;
     Button resetPasswordButton;
     Button editProfileButton;
     String username, address, phoneNumber, email, birthday, gender;
+    TextView usernameEditText, addressEditText, phoneNumberEditText, emailEditText, birthdayEditText, genderEditText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.username);
+        usernameEditText = root.findViewById(R.id.usernameEditText);
+        addressEditText = root.findViewById(R.id.addressEditText);
+        phoneNumberEditText = root.findViewById(R.id.phoneNumberEditText);
+        emailEditText = root.findViewById(R.id.emailEditText);
+        birthdayEditText = root.findViewById(R.id.birthdayEditText);
+        genderEditText = root.findViewById(R.id.genderEditText);
 
-        resetPasswordButton = (Button) root.findViewById(R.id.resetPassword);
         editProfileButton = (Button) root.findViewById(R.id.editProfile);
+        resetPasswordButton = (Button) root.findViewById(R.id.resetPassword);
         resetPasswordButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
             }
         });
+
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showEditProfileDialog();
+                new EditProfileFragment().show(getChildFragmentManager(), "Edit Profile");
             }
         });
 
@@ -48,31 +56,25 @@ public class HomeFragment extends Fragment implements EditProfileFragment.EditPr
                 //textView.setText(s);
             }
         });
+
+        getChildFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                username = bundle.getString("username");
+                address = bundle.getString("address");
+                phoneNumber = bundle.getString("phoneNumber");
+                email = bundle.getString("email");
+                birthday = bundle.getString("birthday");
+                gender = bundle.getString("gender");
+
+                usernameEditText.setText(username);
+                addressEditText.setText(address);
+                phoneNumberEditText.setText(phoneNumber);
+                emailEditText.setText(email);
+                birthdayEditText.setText(birthday);
+                genderEditText.setText(gender);
+            }
+        });
         return root;
-    }
-
-    /**
-     * @post
-     * [Shows the Dialog asking for target points using the targetPointsDialog class and the target_points layout]
-     */
-    // Inspired by zyBooks
-    public void showEditProfileDialog() {
-        EditProfileFragment dialog = new EditProfileFragment();
-        dialog.show(getChildFragmentManager(), "Edit Profile Dialog");
-    }
-
-    @Override
-    public void onEditProfileDialogPositiveClick(String username_input, String address_input, String phoneNumber_input, String email_input, String birthday_input, String gender_input) {
-        username = username_input;
-        address = address_input;
-        phoneNumber = phoneNumber_input;
-        email = email_input;
-        birthday = birthday_input;
-        gender = gender_input;
-    }
-
-    @Override
-    public void onEditProfileDialogNegativeClick() {
-
     }
 }
