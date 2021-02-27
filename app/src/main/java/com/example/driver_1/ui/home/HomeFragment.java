@@ -18,7 +18,7 @@ import com.example.driver_1.R;
 
 public class HomeFragment extends Fragment{
 
-    private HomeViewModel homeViewModel;
+    //private HomeViewModel homeViewModel;
     Button resetPasswordButton;
     Button editProfileButton;
     String username, address, phoneNumber, email, birthday, gender;
@@ -26,8 +26,8 @@ public class HomeFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        //homeViewModel =
+        //        new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         usernameEditText = root.findViewById(R.id.usernameEditText);
         addressEditText = root.findViewById(R.id.addressEditText);
@@ -50,12 +50,12 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        /*homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 //textView.setText(s);
             }
-        });
+        });*/
 
         getChildFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
