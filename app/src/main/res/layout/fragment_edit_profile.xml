@@ -91,6 +91,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/usernameString"
+        android:inputType="text"
         app:layout_constraintBaseline_toBaselineOf="@id/usernameTextView"
         app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
 
@@ -101,6 +102,7 @@
         android:textAlignment="center"
         android:textSize="15sp"
         android:hint="@string/addressString"
+        android:inputType="textPostalAddress"
         app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
         app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
 
@@ -111,6 +113,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/phoneNumberString"
+        android:inputType="phone"
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
 
@@ -121,6 +124,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/emailString"
+        android:inputType="textEmailAddress"
         app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
         app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
 
@@ -131,6 +135,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/birthdayString"
+        android:inputType="text"
         app:layout_constraintBaseline_toBaselineOf="@id/birthdayTextView"
         app:layout_constraintLeft_toRightOf="@id/birthdayTextView"/>
 
@@ -141,6 +146,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/genderString"
+        android:inputType="text"
         app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
         app:layout_constraintLeft_toRightOf="@id/genderTextView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

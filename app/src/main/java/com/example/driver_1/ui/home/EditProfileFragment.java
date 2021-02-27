@@ -4,7 +4,6 @@
 package com.example.driver_1.ui.home;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,11 +31,13 @@ public class EditProfileFragment extends DialogFragment {
     // Inspired from Zybooks and Android Developer documentation
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Making a new dialog using a fragment from fragment_username
+        // Making a new dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Edit Profile");
-        // Telling Dialog which layout to use and to use the EditText
+        // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_edit_profile, (ViewGroup) getView(), false);
+
+        // The Edit Text that I need to get the changed data from
         username = inflater.findViewById(R.id.usernameEditText);
         address = inflater.findViewById(R.id.addressEditText);
         phoneNumber = inflater.findViewById(R.id.phoneNumberEditText);
@@ -44,11 +45,12 @@ public class EditProfileFragment extends DialogFragment {
         birthday = inflater.findViewById(R.id.birthdayEditText);
         gender = inflater.findViewById(R.id.genderEditText);
 
-        // Creating the "OK" and "Default" buttons
+        // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        // Getting data from the Edit Text and putting it in the Bundle
                         Bundle result = new Bundle();
                         result.putString("username", username.getText().toString());
                         result.putString("address", address.getText().toString());
@@ -56,11 +58,13 @@ public class EditProfileFragment extends DialogFragment {
                         result.putString("email", email.getText().toString());
                         result.putString("birthday", birthday.getText().toString());
                         result.putString("gender", gender.getText().toString());
+                        // Sending the data to the parent fragment (the HomeFragment.java)
                         getParentFragmentManager().setFragmentResult("requestKey", result);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        // No action required if canceled
                     }
                 });
         return builder.create();
