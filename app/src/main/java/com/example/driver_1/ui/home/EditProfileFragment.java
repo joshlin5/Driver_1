@@ -1,7 +1,7 @@
 // Joshua Lin C15684772 jlin5@g.clemson.edu
 // Code referenced from Zybooks: Mobile App Development, official Java Documentation (Oracle), and official Android documentation
 
-package com.example.driver_1.data.home;
+package com.example.driver_1.ui.home;
 
 import android.app.Dialog;
 import android.content.Context;
