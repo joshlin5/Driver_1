@@ -28,7 +28,7 @@
         app:action="@string/action_sign_in"
         tools:layout="@layout/activity_login"/>
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/nav_settings"
         android:name="com.example.driver_1.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
