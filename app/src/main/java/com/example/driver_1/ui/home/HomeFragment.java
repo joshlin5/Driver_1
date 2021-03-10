@@ -1,5 +1,6 @@
 package com.example.driver_1.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 //import com.example.driver_1.ui.editProfile.EditProfileFragment;
 
 public class HomeFragment extends Fragment{
@@ -67,6 +79,39 @@ public class HomeFragment extends Fragment{
             birthdayEditText.setText(birthday);
             genderEditText.setText(gender);
         });
+        String url = "https://driver1-web-app.herokuapp.com/api/drivers";
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // get JSONObject from JSON file
+                        // Display the response string.
+                        try {
+                            // get JSONObject from JSON file
+                            JSONObject obj = new JSONObject(response.toString());
+                            // fetch JSONObject named employee
+                            String temp = obj.toString();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //textView.setText("That didn't work!");
+            }
+        });
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
         return root;
     }
+
+
 }
