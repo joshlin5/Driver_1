@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment{
                         // Display the response string.
                         try {
                             // get JSONObject from JSON file
-                            JSONObject obj = new JSONObject(response.toString());
+                            JSONArray obj = new JSONArray(response.toString());
                             // fetch JSONObject named employee
                             String temp = obj.toString();
 
