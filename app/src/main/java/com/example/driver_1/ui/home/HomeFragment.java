@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment{
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton;
     // TextViews that need to be edited after edit profile
-    TextView usernameEditText, addressEditText, phoneNumberEditText, emailEditText, birthdayEditText, genderEditText;
+    TextView usernameEditText, addressEditText, phoneNumberEditText, emailEditText, birthdayEditText, genderEditText, sideDrawerEmail;
     // Strings for the TextViews that need to be changed
     String username, address, phoneNumber, email, birthday, gender;
 
@@ -46,6 +46,8 @@ public class HomeFragment extends Fragment{
         emailEditText = root.findViewById(R.id.emailEditText);
         birthdayEditText = root.findViewById(R.id.birthdayEditText);
         genderEditText = root.findViewById(R.id.genderEditText);
+        sideDrawerEmail = root.findViewById(R.id.drawerEmail);
+        //sideDrawerEmail.setText(email);
 
         // Initialize the Buttons
         editProfileButton = root.findViewById(R.id.editProfile);

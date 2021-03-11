@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -33,6 +34,7 @@ import com.example.driver_1.ui.login.LoginViewModelFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //loginButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_loginActivity_to_mainActivity, null));
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -129,6 +130,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
+        /*loginViewModel.login(usernameEditText.getText().toString(),
+                passwordEditText.getText().toString());*/
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
