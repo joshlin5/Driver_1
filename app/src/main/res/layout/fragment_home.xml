@@ -3,74 +3,99 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/royalBlue">
+
+    <TextView
+        android:id="@+id/profilePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        android:text="Profile Page"
+        android:textColor="@color/peach"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="@string/usernameTextView"
-        app:layout_constraintTop_toBottomOf="@id/editProfile"
+        android:textColor="@color/peach"
+        app:layout_constraintTop_toBottomOf="@id/profilePage"
         app:layout_constraintBottom_toTopOf="@id/addressTextView"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/usernameEditText"/>
 
     <TextView
         android:id="@+id/addressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="15sp"
+        android:textSize="30sp"
         android:text="@string/addressTextView"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/usernameTextView"
         app:layout_constraintBottom_toTopOf="@id/phoneNumberTextView"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/addressEditText"/>
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="@string/phone_numberTextView"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/addressTextView"
         app:layout_constraintBottom_toTopOf="@id/emailTextView"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/phoneNumberEditText"/>
 
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="@string/emailTextView"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
         app:layout_constraintBottom_toTopOf="@id/birthdayTextView"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/emailEditText"/>
 
     <TextView
         android:id="@+id/birthdayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="@string/birthdayTextView"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/emailTextView"
         app:layout_constraintBottom_toTopOf="@id/genderTextView"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/birthdayEditText"/>
 
     <TextView
         android:id="@+id/genderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:hint="@string/genderTextView"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
         app:layout_constraintBottom_toTopOf="@id/resetPassword"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/genderEditText"/>
 
     <TextView
         android:id="@+id/usernameEditText"
@@ -79,8 +104,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/usernameString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/usernameTextView"
-        app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/usernameTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/addressEditText"
@@ -89,8 +116,10 @@
         android:textAlignment="center"
         android:textSize="15sp"
         android:hint="@string/addressString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
-        app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/addressTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/phoneNumberEditText"
@@ -99,8 +128,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/phoneNumberString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
-        app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/emailEditText"
@@ -109,8 +140,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/emailString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
-        app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/emailTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/birthdayEditText"
@@ -119,8 +152,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/birthdayString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/birthdayTextView"
-        app:layout_constraintLeft_toRightOf="@id/birthdayTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/birthdayTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/genderEditText"
@@ -129,8 +164,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/genderString"
+        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
-        app:layout_constraintLeft_toRightOf="@id/genderTextView"/>
+        app:layout_constraintLeft_toRightOf="@id/genderTextView"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/resetPassword"
@@ -139,6 +176,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/resetPasswordString"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/genderTextView"
         app:layout_constraintBottom_toTopOf="@id/editProfile"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -151,6 +189,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/editProfileString"
+        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/resetPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

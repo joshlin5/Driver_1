@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="mint">#ADEFD1</color>
+    <color name="sailorBlue">#00203F</color>
+    <color name="royalBlue">#00539C</color>
+    <color name="peach">#EEA47F</color>
+    <color name="sapphire">#52B2BF</color>
 </resources>
