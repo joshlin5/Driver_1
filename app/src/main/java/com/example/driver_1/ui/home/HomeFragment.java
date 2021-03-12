@@ -1,6 +1,5 @@
 package com.example.driver_1.ui.home;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,7 +19,6 @@ import com.example.driver_1.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 //import com.example.driver_1.ui.editProfile.EditProfileFragment;
 
 public class HomeFragment extends Fragment{
@@ -30,9 +26,9 @@ public class HomeFragment extends Fragment{
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton;
     // TextViews that need to be edited after edit profile
-    TextView usernameEditText, addressEditText, phoneNumberEditText, emailEditText, birthdayEditText, genderEditText, sideDrawerEmail;
+    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sideDrawerEmail;
     // Strings for the TextViews that need to be changed
-    String username, address, phoneNumber, email, birthday, gender;
+    String username, address, phoneNumber, email, age, gender;
 
     // Initializes Buttons and TextViews
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,12 +36,12 @@ public class HomeFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Initialize the TextViews
-        usernameEditText = root.findViewById(R.id.usernameEditText);
-        addressEditText = root.findViewById(R.id.addressEditText);
-        phoneNumberEditText = root.findViewById(R.id.phoneNumberEditText);
-        emailEditText = root.findViewById(R.id.emailEditText);
-        birthdayEditText = root.findViewById(R.id.birthdayEditText);
-        genderEditText = root.findViewById(R.id.genderEditText);
+        usernameText = root.findViewById(R.id.usernameTextView);
+        addressText = root.findViewById(R.id.addressTextView);
+        phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
+        emailText = root.findViewById(R.id.emailTextView);
+        ageText = root.findViewById(R.id.ageTextView);
+        genderText = root.findViewById(R.id.genderTextView);
         sideDrawerEmail = root.findViewById(R.id.drawerEmail);
         //sideDrawerEmail.setText(email);
 
@@ -70,16 +66,21 @@ public class HomeFragment extends Fragment{
             address = bundle.getString("address");
             phoneNumber = bundle.getString("phoneNumber");
             email = bundle.getString("email");
-            birthday = bundle.getString("birthday");
+            age = bundle.getString("age");
             gender = bundle.getString("gender");
 
             // Sets data to corresponding TextViews in fragment_home.xml
-            usernameEditText.setText(username);
-            addressEditText.setText(address);
-            phoneNumberEditText.setText(phoneNumber);
-            emailEditText.setText(email);
-            birthdayEditText.setText(birthday);
-            genderEditText.setText(gender);
+            if(!username.equals(""))
+                usernameText.setText("Username: " + username);
+            if(!address.equals(""))
+                addressText.setText("Address: " + address);
+            if(!phoneNumber.equals(""))
+                phoneNumberText.setText("Phone Number: " + phoneNumber);
+            if(!email.equals(""))
+                emailText.setText("Email: " + email);
+            if(!age.equals(""))
+                ageText.setText("Age: " + age);
+            genderText.setText("Gender: " + gender);
         });
         String url = "https://driver1-web-app.herokuapp.com/api/drivers";
 

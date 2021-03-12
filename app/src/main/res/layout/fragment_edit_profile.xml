@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/royalBlue">
 
     <TextView
@@ -65,16 +65,16 @@
         android:text="@string/emailTextView"
         android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
-        app:layout_constraintBottom_toTopOf="@id/birthdayTextView"
+        app:layout_constraintBottom_toTopOf="@id/ageTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/birthdayTextView"
+        android:id="@+id/ageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="@string/birthdayTextView"
+        android:text="Age: "
         android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/emailTextView"
         app:layout_constraintBottom_toTopOf="@id/genderTextView"
@@ -86,9 +86,9 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:hint="@string/genderTextView"
+        android:text="@string/genderTextView"
         android:textColor="@color/peach"
-        app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
+        app:layout_constraintTop_toBottomOf="@id/ageTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -141,26 +141,22 @@
         app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
 
     <EditText
-        android:id="@+id/birthdayEditText"
+        android:id="@+id/ageEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:hint="@string/birthdayString"
-        android:inputType="text"
+        android:hint="@string/_30"
+        android:inputType="number"
         android:textColor="@color/peach"
-        app:layout_constraintBaseline_toBaselineOf="@id/birthdayTextView"
-        app:layout_constraintLeft_toRightOf="@id/birthdayTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/ageTextView"
+        app:layout_constraintLeft_toRightOf="@id/ageTextView"/>
 
-    <EditText
-        android:id="@+id/genderEditText"
+    <Spinner
+        android:id="@+id/genderChoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:hint="@string/genderString"
-        android:inputType="text"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
         app:layout_constraintLeft_toRightOf="@id/genderTextView"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

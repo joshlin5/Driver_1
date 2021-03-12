@@ -57,4 +57,11 @@
     <string name="points">0</string>
     <string name="pointsText">Points:</string>
     <string name="logout">Logout</string>
+    <string name="_30">30</string>
+    <string name="age_30">Age: 30</string>
+
+    <string-array name="genderOptions">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

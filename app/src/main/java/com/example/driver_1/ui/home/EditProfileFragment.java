@@ -9,15 +9,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.driver_1.R;
 
-public class EditProfileFragment extends DialogFragment {
+public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // The EditText for the Dialog
-    EditText username, address, phoneNumber, email, birthday, gender;
+    EditText username, address, phoneNumber, email, age;
+    Spinner gender;
+    String genderResult = "Male";
 
     /**
      *
@@ -42,8 +49,17 @@ public class EditProfileFragment extends DialogFragment {
         address = inflater.findViewById(R.id.addressEditText);
         phoneNumber = inflater.findViewById(R.id.phoneNumberEditText);
         email = inflater.findViewById(R.id.emailEditText);
-        birthday = inflater.findViewById(R.id.birthdayEditText);
-        gender = inflater.findViewById(R.id.genderEditText);
+        age = inflater.findViewById(R.id.ageEditText);
+
+        gender = (Spinner) inflater.findViewById(R.id.genderChoice);
+        gender.setOnItemSelectedListener(this);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.genderOptions, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        gender.setAdapter(adapter);
 
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
@@ -52,12 +68,32 @@ public class EditProfileFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // Getting data from the Edit Text and putting it in the Bundle
                         Bundle result = new Bundle();
-                        result.putString("username", username.getText().toString());
-                        result.putString("address", address.getText().toString());
-                        result.putString("phoneNumber", phoneNumber.getText().toString());
-                        result.putString("email", email.getText().toString());
-                        result.putString("birthday", birthday.getText().toString());
-                        result.putString("gender", gender.getText().toString());
+                        if(!username.getText().toString().equals("") && username.getText().toString().length() > 0)
+                            result.putString("username", username.getText().toString());
+                        else
+                            result.putString("username", "");
+
+                        if(!address.getText().toString().equals("") && address.getText().toString().length() > 0)
+                            result.putString("address", address.getText().toString());
+                        else
+                            result.putString("address", "");
+
+                        if(!phoneNumber.getText().toString().equals("") && phoneNumber.getText().toString().length() > 0)
+                            result.putString("phoneNumber", phoneNumber.getText().toString());
+                        else
+                            result.putString("phoneNumber", "");
+
+                        if(!email.getText().toString().equals("") && email.getText().toString().length() > 0)
+                            result.putString("email", email.getText().toString());
+                        else
+                            result.putString("email", "");
+
+                        if(!age.getText().toString().equals("") && age.getText().toString().length() > 0)
+                            result.putString("age", age.getText().toString());
+                        else
+                            result.putString("age", "");
+
+                        result.putString("gender", genderResult);
                         // Sending the data to the parent fragment (the HomeFragment.java)
                         getParentFragmentManager().setFragmentResult("requestKey", result);
                     }
@@ -68,5 +104,15 @@ public class EditProfileFragment extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        genderResult = (String) parent.getItemAtPosition(position);
+    }
+
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        //
     }
 }
