@@ -54,4 +54,7 @@
     <string name="menu_store">Store</string>
     <string name="menu_settings">Settings</string>
     <string name="settings">This is the settings page</string>
+    <string name="points">0</string>
+    <string name="pointsText">Points:</string>
+    <string name="logout">Logout</string>
 </resources>
