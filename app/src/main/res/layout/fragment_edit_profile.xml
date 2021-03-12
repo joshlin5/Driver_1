@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/royalBlue">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/editProfile"
@@ -14,7 +13,6 @@
         android:textAlignment="center"
         android:textSize="40sp"
         android:text="@string/edit_profile"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/usernameTextView"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,7 +25,6 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/usernameTextView"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/editProfile"
         app:layout_constraintBottom_toTopOf="@id/addressTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -39,7 +36,6 @@
         android:textAlignment="center"
         android:textSize="15sp"
         android:text="@string/addressTextView"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/usernameTextView"
         app:layout_constraintBottom_toTopOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -51,7 +47,6 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/phone_numberTextView"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/addressTextView"
         app:layout_constraintBottom_toTopOf="@id/emailTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -63,7 +58,6 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/emailTextView"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
         app:layout_constraintBottom_toTopOf="@id/ageTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -75,7 +69,6 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="Age: "
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/emailTextView"
         app:layout_constraintBottom_toTopOf="@id/genderTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -87,7 +80,6 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/genderTextView"
-        android:textColor="@color/peach"
         app:layout_constraintTop_toBottomOf="@id/ageTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -100,7 +92,6 @@
         android:textSize="20sp"
         android:hint="@string/usernameString"
         android:inputType="text"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/usernameTextView"
         app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
 
@@ -112,7 +103,6 @@
         android:textSize="15sp"
         android:hint="@string/addressString"
         android:inputType="textPostalAddress"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
         app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
 
@@ -124,7 +114,6 @@
         android:textSize="20sp"
         android:hint="@string/phoneNumberString"
         android:inputType="phone"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
 
@@ -136,7 +125,6 @@
         android:textSize="20sp"
         android:hint="@string/emailString"
         android:inputType="textEmailAddress"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
         app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
 
@@ -148,7 +136,6 @@
         android:textSize="20sp"
         android:hint="@string/_30"
         android:inputType="number"
-        android:textColor="@color/peach"
         app:layout_constraintBaseline_toBaselineOf="@id/ageTextView"
         app:layout_constraintLeft_toRightOf="@id/ageTextView"/>
 
