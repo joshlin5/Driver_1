@@ -5,9 +5,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.data.model.LoggedInUser;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -22,10 +27,10 @@ import java.util.Map;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
-        /*String url = "https://driver1-web-app.herokuapp.com/api/authenticate";
+    public Result<LoggedInUser> login(String username, String password, Context c) {
+        String url = "https://driver1-web-app.herokuapp.com/api/authenticate/";
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        RequestQueue queue = Volley.newRequestQueue(c);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("email", username);
@@ -58,28 +63,29 @@ public class LoginDataSource {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //textView.setText("That didn't work!");
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Log.d("TAG", ""+error.getMessage()+","+error.toString());
+
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("_username", "admin");
-                params.put("_password", "root");
+                params.put("email", username);
+                params.put("password", password);
                 return params;
             }
-
-            @Override
+            /*@Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                final HashMap<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "multipart/form-data");
-                return headers;
-            }
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                return params;
+            }*/
         };
 
 
 // Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
+        queue.add(stringRequest);
         try {
             // TODO: handle loggedInUser authentication
 
