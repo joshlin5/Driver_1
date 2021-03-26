@@ -56,9 +56,7 @@ public class HomeFragment extends Fragment{
         });
 
         // onCLick Listener for the resetPasswordButton
-        applySponsor.setOnClickListener(v -> {
-            // New Application Form
-        });
+        applySponsor.setOnClickListener(v -> new ApplySponsorFragment().show(getChildFragmentManager(), "Edit Profile"));
 
         // onCLick Listener for the editProfileButton
         // Shows the fragment_edit_profile.xml using the EditProfileFragment.java file
