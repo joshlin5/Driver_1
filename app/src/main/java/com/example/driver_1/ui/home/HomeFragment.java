@@ -24,7 +24,7 @@ import org.json.JSONException;
 public class HomeFragment extends Fragment{
 
     // Buttons in fragment_home.xml
-    Button resetPasswordButton, editProfileButton;
+    Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
     TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sideDrawerEmail;
     // Strings for the TextViews that need to be changed
@@ -48,10 +48,16 @@ public class HomeFragment extends Fragment{
         // Initialize the Buttons
         editProfileButton = root.findViewById(R.id.editProfile);
         resetPasswordButton = root.findViewById(R.id.resetPassword);
+        applySponsor = root.findViewById(R.id.applyForSponsor);
 
         // onCLick Listener for the resetPasswordButton
         resetPasswordButton.setOnClickListener(v -> {
             // Do something in response to button click
+        });
+
+        // onCLick Listener for the resetPasswordButton
+        applySponsor.setOnClickListener(v -> {
+            // New Application Form
         });
 
         // onCLick Listener for the editProfileButton

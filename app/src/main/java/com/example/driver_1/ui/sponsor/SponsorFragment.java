@@ -16,20 +16,20 @@ import com.example.driver_1.R;
 
 public class SponsorFragment extends Fragment {
 
-    private SponsorViewModel sponsorViewModel;
+    //private SponsorViewModel sponsorViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sponsorViewModel =
-                new ViewModelProvider(this).get(SponsorViewModel.class);
+        //sponsorViewModel =
+                //new ViewModelProvider(this).get(SponsorViewModel.class);
         View root = inflater.inflate(R.layout.fragment_sponsor, container, false);
         final TextView textView = root.findViewById(R.id.text_sponsor);
-        sponsorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        //sponsorViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            //@Override
+            //public void onChanged(@Nullable String s) {
+                //textView.setText(s);
+            //}
+        //});
         return root;
     }
 }
