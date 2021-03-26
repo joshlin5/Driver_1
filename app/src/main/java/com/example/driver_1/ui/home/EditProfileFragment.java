@@ -95,7 +95,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
 
                         result.putString("gender", genderResult);
                         // Sending the data to the parent fragment (the HomeFragment.java)
-                        getParentFragmentManager().setFragmentResult("requestKey", result);
+                        getParentFragmentManager().setFragmentResult("EditProfileResult", result);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

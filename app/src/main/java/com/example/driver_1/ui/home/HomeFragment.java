@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment{
         });
 
         // onCLick Listener for the resetPasswordButton
-        applySponsor.setOnClickListener(v -> new ApplySponsorFragment().show(getChildFragmentManager(), "Edit Profile"));
+        applySponsor.setOnClickListener(v -> new ApplySponsorFragment().show(getChildFragmentManager(), "Sponsor Application"));
 
         // onCLick Listener for the editProfileButton
         // Shows the fragment_edit_profile.xml using the EditProfileFragment.java file
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment{
         editProfileButton.setOnClickListener(v -> new EditProfileFragment().show(getChildFragmentManager(), "Edit Profile"));
 
         // Sets result data from fragment_edit_profile.xml EditText field to the corresponding TextViews in fragment_home.xml
-        getChildFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {
+        getChildFragmentManager().setFragmentResultListener("EditProfileResult", this, (requestKey, bundle) -> {
             // Data from fragment_edit_profile.xml EditText fields
             username = bundle.getString("username");
             address = bundle.getString("address");
