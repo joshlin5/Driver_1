@@ -42,65 +42,20 @@ public class LoginDataSource {
     }
 
 
-    public Result<LoggedInUser> login(String username, String password, Context c) {
-        final int check = 0;
-
-
-
+    public Result<LoggedInUser> login(String userInfo) {
 
         try {
-            // TODO: handle loggedInUser authentication
-            String url = "https://driver1-web-app.herokuapp.com/api/authenticate/";
-            // Instantiate the RequestQueue.
-            RequestQueue queue = Volley.newRequestQueue(c);
-// Request a string response from the provided URL.
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // get JSONObject from JSON file
-                            // Display the response string.
 
-                                // get JSONObject from JSON file
-                                //JSONObject obj = new JSONObject(response.toString());
-                                // fetch JSONObject named employee
-                                //String temp = obj.toString();
-                                if(response.equals("good")){
-                                    c.startActivity(new Intent(c.getApplicationContext(), MainActivity.class));
-                                }
-                                else{
-                                    //check = 2;
-                                }
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d("TAG", "Error: " + error.getMessage());
-                    Log.d("TAG", ""+error.getMessage()+","+error.toString());
-
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("email", username);
-                    params.put("password", password);
-                    return params;
-                }
-            };
-
-// Add the request to the RequestQueue.
-            queue.add(stringRequest);
             LoggedInUser fakeUser =
                     new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
+                            userInfo);
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
         }
     }
+
+
 
     public void logout() {
         // TODO: revoke authentication
