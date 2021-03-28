@@ -7,145 +7,167 @@
     tools:context=".ui.register.RegisterActivity">
 
     <TextView
-        android:id="@+id/editProfile"
+        android:id="@+id/registerProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="40sp"
         android:text="@string/register"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/usernameTextView"
+        app:layout_constraintBottom_toTopOf="@id/usernameTextViewRegister"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/usernameTextView"
+        android:id="@+id/usernameTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/usernameTextView"
-        app:layout_constraintTop_toBottomOf="@id/editProfile"
-        app:layout_constraintBottom_toTopOf="@id/addressTextView"
+        app:layout_constraintTop_toBottomOf="@id/registerProfile"
+        app:layout_constraintBottom_toTopOf="@id/addressTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/addressTextView"
+        android:id="@+id/passwordTextViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="@string/passwordTextView"
+        app:layout_constraintTop_toBottomOf="@id/usernameTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/addressTextViewRegister"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/addressTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="15sp"
         android:text="@string/addressTextView"
-        app:layout_constraintTop_toBottomOf="@id/usernameTextView"
-        app:layout_constraintBottom_toTopOf="@id/phoneNumberTextView"
+        app:layout_constraintTop_toBottomOf="@id/passwordTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/phoneNumberTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/phoneNumberTextView"
+        android:id="@+id/phoneNumberTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/phone_numberTextView"
-        app:layout_constraintTop_toBottomOf="@id/addressTextView"
-        app:layout_constraintBottom_toTopOf="@id/emailTextView"
+        app:layout_constraintTop_toBottomOf="@id/addressTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/emailTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/emailTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/emailTextView"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
-        app:layout_constraintBottom_toTopOf="@id/ageTextView"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/ageTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/ageTextView"
+        android:id="@+id/ageTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Age: "
-        app:layout_constraintTop_toBottomOf="@id/emailTextView"
-        app:layout_constraintBottom_toTopOf="@id/genderTextView"
+        android:text="@string/age"
+        app:layout_constraintTop_toBottomOf="@id/emailTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/genderTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/genderTextView"
+        android:id="@+id/genderTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/genderTextView"
-        app:layout_constraintTop_toBottomOf="@id/ageTextView"
+        app:layout_constraintTop_toBottomOf="@id/ageTextViewRegister"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/usernameEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/usernameString"
         android:inputType="text"
-        app:layout_constraintBaseline_toBaselineOf="@id/usernameTextView"
-        app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/usernameTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/usernameTextViewRegister"/>
 
     <EditText
-        android:id="@+id/addressEditText"
+        android:id="@+id/passwordEditTextRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:hint="@string/password"
+        android:inputType="text"
+        app:layout_constraintBaseline_toBaselineOf="@id/passwordTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/passwordTextViewRegister"/>
+
+    <EditText
+        android:id="@+id/addressEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="15sp"
         android:hint="@string/addressString"
         android:inputType="textPostalAddress"
-        app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
-        app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/addressTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/addressTextViewRegister"/>
 
     <EditText
-        android:id="@+id/phoneNumberEditText"
+        android:id="@+id/phoneNumberEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/phoneNumberString"
         android:inputType="phone"
-        app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
-        app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/phoneNumberTextViewRegister"/>
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/emailString"
         android:inputType="textEmailAddress"
-        app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
-        app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/emailTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/emailTextViewRegister"/>
 
     <EditText
-        android:id="@+id/ageEditText"
+        android:id="@+id/ageEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="@string/_30"
         android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@id/ageTextView"
-        app:layout_constraintLeft_toRightOf="@id/ageTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/ageTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/ageTextViewRegister"/>
 
     <Spinner
-        android:id="@+id/genderChoice"
+        android:id="@+id/genderChoiceRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/genderTextView"
-        app:layout_constraintLeft_toRightOf="@id/genderTextView" />
+        android:layout_marginStart="20dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/genderTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/genderTextViewRegister" />
 
     <Button
         android:id="@+id/register2"

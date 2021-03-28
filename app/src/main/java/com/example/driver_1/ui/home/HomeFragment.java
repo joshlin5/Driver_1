@@ -1,5 +1,7 @@
 package com.example.driver_1.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +37,16 @@ public class HomeFragment extends Fragment{
         // Getting the layout associated with this file
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        this.getActivity();
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
-        addressText = root.findViewById(R.id.addressTextView);
-        phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
-        emailText = root.findViewById(R.id.emailTextView);
-        ageText = root.findViewById(R.id.ageTextView);
-        genderText = root.findViewById(R.id.genderTextView);
+        addressText = root.findViewById(R.id.addressTextViewRegister);
+        phoneNumberText = root.findViewById(R.id.phoneNumberTextViewRegister);
+        emailText = root.findViewById(R.id.emailTextViewRegister);
+        emailText.setText(prefs.getString("email", "email"));
+        ageText = root.findViewById(R.id.ageTextViewRegister);
+        genderText = root.findViewById(R.id.genderTextViewRegister);
         sideDrawerEmail = root.findViewById(R.id.drawerEmail);
         //sideDrawerEmail.setText(email);
 
@@ -69,7 +74,7 @@ public class HomeFragment extends Fragment{
             username = bundle.getString("username");
             address = bundle.getString("address");
             phoneNumber = bundle.getString("phoneNumber");
-            email = bundle.getString("email");
+            email = prefs.getString("email", bundle.getString("email"));
             age = bundle.getString("age");
             gender = bundle.getString("gender");
 
@@ -100,7 +105,7 @@ public class HomeFragment extends Fragment{
                         // Display the response string.
                         try {
                             // get JSONObject from JSON file
-                            JSONArray obj = new JSONArray(response.toString());
+                            JSONArray obj = new JSONArray(response);
                             // fetch JSONObject named employee
                             String temp = obj.toString();
 

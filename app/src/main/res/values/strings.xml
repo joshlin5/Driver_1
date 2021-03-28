@@ -60,6 +60,9 @@
     <string name="_30">30</string>
     <string name="age_30">Age: 30</string>
     <string name="register">Register</string>
+    <string name="age">Age:</string>
+    <string name="passwordTextView">Password:</string>
+    <string name="password">password</string>
 
     <string-array name="genderOptions">
         <item>Male</item>

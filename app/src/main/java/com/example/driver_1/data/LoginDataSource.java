@@ -41,11 +41,8 @@ public class LoginDataSource {
         }
     }
 
-
     public Result<LoggedInUser> login(String userInfo) {
-
         try {
-
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             userInfo);

@@ -35,6 +35,18 @@ public class LoggedInUser {
 
     }
 
+    public LoggedInUser(String id, String name, String address, String phoneNumber, String email, int age, int gender){
+        this.userId = id;
+        this.displayName = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.points = 0;
+
+    }
+
 
     public String getUserId() {
         return userId;

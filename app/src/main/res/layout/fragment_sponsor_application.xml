@@ -26,11 +26,11 @@
         android:textSize="20sp"
         android:text="Info 1: "
         app:layout_constraintTop_toBottomOf="@id/editProfile"
-        app:layout_constraintBottom_toTopOf="@id/addressTextView"
+        app:layout_constraintBottom_toTopOf="@id/addressTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/addressTextView"
+        android:id="@+id/addressTextViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -41,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/usernameEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -52,14 +52,14 @@
         app:layout_constraintLeft_toRightOf="@id/usernameTextView"/>
 
     <EditText
-        android:id="@+id/addressEditText"
+        android:id="@+id/addressEditTextRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
         android:hint="Type Here"
         android:inputType="textPostalAddress"
-        app:layout_constraintBaseline_toBaselineOf="@id/addressTextView"
-        app:layout_constraintLeft_toRightOf="@id/addressTextView"/>
+        app:layout_constraintBaseline_toBaselineOf="@id/addressTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/addressTextViewRegister"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
