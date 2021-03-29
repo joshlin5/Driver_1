@@ -20,15 +20,15 @@ import com.example.driver_1.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 //import com.example.driver_1.ui.editProfile.EditProfileFragment;
-
+// Purchase status
 public class HomeFragment extends Fragment{
 
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
-    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sideDrawerEmail;
+    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sideDrawerEmail, sponsorText;
     // Strings for the TextViews that need to be changed
-    String username, address, phoneNumber, email, age, gender;
+    String username, address, phoneNumber, email, age, gender, sponsor;
 
     // Initializes Buttons and TextViews
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment{
         ageText = root.findViewById(R.id.ageTextView);
         genderText = root.findViewById(R.id.genderTextView);
         sideDrawerEmail = root.findViewById(R.id.drawerEmail);
+        sponsorText = root.findViewById(R.id.sponsor);
         //sideDrawerEmail.setText(email);
 
         // Initialize the Buttons

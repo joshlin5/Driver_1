@@ -61,4 +61,6 @@ public class ApplySponsorFragment extends DialogFragment{
                 });
         return builder.create();
     }
+    // Get list of all sponsors
+    // Beside sponsors have a details button where they can find more details about the sponsor
 }

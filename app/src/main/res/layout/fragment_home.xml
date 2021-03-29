@@ -85,9 +85,35 @@
         android:textSize="30sp"
         android:text="Gender: Male"
         app:layout_constraintTop_toBottomOf="@id/ageTextView"
+        app:layout_constraintBottom_toTopOf="@id/sponsor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/sponsor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="Sponsor Company: None"
+        app:layout_constraintTop_toBottomOf="@id/genderTextView"
+        app:layout_constraintBottom_toTopOf="@id/points"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="Points: 10"
+        app:layout_constraintTop_toBottomOf="@id/resetPassword"
         app:layout_constraintBottom_toTopOf="@id/resetPassword"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+
     <Button
         android:id="@+id/resetPassword"
         android:layout_width="wrap_content"
@@ -95,7 +121,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/resetPasswordString"
-        app:layout_constraintTop_toBottomOf="@id/genderTextView"
+        app:layout_constraintTop_toBottomOf="@id/points"
         app:layout_constraintBottom_toTopOf="@id/editProfile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

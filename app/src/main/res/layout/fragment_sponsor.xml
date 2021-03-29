@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Sponsors"
+        android:text="Sponsor"
         app:layout_constraintBottom_toTopOf="@id/sponsor_name"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -23,8 +24,9 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Sponsor name: Bob"
+        android:text="Name: Bob"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_sponsor"
         app:layout_constraintBottom_toTopOf="@id/sponsor_details" />
 
@@ -35,6 +37,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="Bob is the sponsor for: Rob Feel, Mob Real, Hob Wheel"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sponsor_name" />
