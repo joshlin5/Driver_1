@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -18,7 +19,8 @@ import com.example.driver_1.R;
 
 public class ApplySponsorFragment extends DialogFragment{
     // The EditText for the Dialog
-    EditText username, address;
+    int sponsorId;
+    Spinner sponsors;
 
     /**
      *
@@ -39,8 +41,7 @@ public class ApplySponsorFragment extends DialogFragment{
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
 
         // The Edit Text that I need to get the changed data from
-        username = inflater.findViewById(R.id.usernameEditTextRegister);
-        address = inflater.findViewById(R.id.addressEditTextRegister);
+        sponsors = inflater.findViewById(R.id.sponsorSpinner);
 
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)

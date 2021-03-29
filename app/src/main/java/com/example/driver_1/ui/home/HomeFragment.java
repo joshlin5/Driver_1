@@ -41,12 +41,12 @@ public class HomeFragment extends Fragment{
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
-        addressText = root.findViewById(R.id.addressTextViewRegister);
-        phoneNumberText = root.findViewById(R.id.phoneNumberTextViewRegister);
-        emailText = root.findViewById(R.id.emailTextViewRegister);
+        addressText = root.findViewById(R.id.addressTextView);
+        phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
+        emailText = root.findViewById(R.id.emailTextView);
         emailText.setText(prefs.getString("email", "email"));
-        ageText = root.findViewById(R.id.ageTextViewRegister);
-        genderText = root.findViewById(R.id.genderTextViewRegister);
+        ageText = root.findViewById(R.id.ageTextView);
+        genderText = root.findViewById(R.id.genderTextView);
         sideDrawerEmail = root.findViewById(R.id.drawerEmail);
         sponsorText = root.findViewById(R.id.sponsor);
         //sideDrawerEmail.setText(email);
