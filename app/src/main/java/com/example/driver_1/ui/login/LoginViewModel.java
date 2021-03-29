@@ -113,7 +113,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void getUserInfo(String userId, Context c){
-        String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + userId;
+        String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
 // Request a string response from the provided URL.

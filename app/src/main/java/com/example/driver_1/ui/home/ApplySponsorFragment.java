@@ -64,15 +64,15 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
 
         sponsors.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                array, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+        //        array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        sponsors.setAdapter(adapter);
+        //sponsors.setAdapter(adapter);
 
         // Creating the "OK" and "Cancel" buttons
-        builder.setView(inflater)
+        /*builder.setView(inflater)
                 .setPositiveButton("Send Form", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -100,7 +100,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                     public void onClick(DialogInterface dialog, int id) {
                         // No action required if canceled
                     }
-                });
+                });*/
         return builder.create();
     }
 
