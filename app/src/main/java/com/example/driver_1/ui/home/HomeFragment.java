@@ -41,11 +41,16 @@ public class HomeFragment extends Fragment{
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
+        usernameText.setText(prefs.getString("username", "username"));
         addressText = root.findViewById(R.id.addressTextView);
+        addressText.setText(prefs.getString("address", "address"));
         phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
+        phoneNumberText.setText(prefs.getString("phoneNumber", "111-111-1111"));
         emailText = root.findViewById(R.id.emailTextView);
         emailText.setText(prefs.getString("email", "email"));
         ageText = root.findViewById(R.id.ageTextView);
+        age = String.valueOf(prefs.getInt("age", 0));
+        ageText.setText(age);
         genderText = root.findViewById(R.id.genderTextView);
         sideDrawerEmail = root.findViewById(R.id.drawerEmail);
         sponsorText = root.findViewById(R.id.sponsor);
@@ -92,37 +97,6 @@ public class HomeFragment extends Fragment{
                 ageText.setText("Age: " + age);
             genderText.setText("Gender: " + gender);
         });
-        String url = "https://driver1-web-app.herokuapp.com/api/drivers";
-
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // get JSONObject from JSON file
-                        // Display the response string.
-                        try {
-                            // get JSONObject from JSON file
-                            JSONArray obj = new JSONArray(response);
-                            // fetch JSONObject named employee
-                            String temp = obj.toString();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //textView.setText("That didn't work!");
-            }
-        });
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
         return root;
     }
 

@@ -83,13 +83,6 @@ public class LoginViewModel extends ViewModel {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
-        /*if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }*/
     }
 
     public void loginDataChanged(String username, String password) {
@@ -120,7 +113,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void getUserInfo(String userId, Context c){
-        String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
+        String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + userId;
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
 // Request a string response from the provided URL.
