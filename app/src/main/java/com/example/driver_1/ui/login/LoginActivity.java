@@ -6,7 +6,9 @@ import androidx.annotation.MainThread;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,6 +32,7 @@ import com.example.driver_1.R;
 import com.example.driver_1.data.loggedInDriver.MainActivity;
 import com.example.driver_1.ui.login.LoginViewModel;
 import com.example.driver_1.ui.login.LoginViewModelFactory;
+import com.example.driver_1.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,7 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+        final Button registerButton = findViewById(R.id.register);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -126,14 +132,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(v.getContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
-        Intent intent = new Intent(this, MainActivity.class);
+        /*Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();*/
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
