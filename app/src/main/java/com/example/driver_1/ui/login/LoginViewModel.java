@@ -83,13 +83,6 @@ public class LoginViewModel extends ViewModel {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
-        /*if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }*/
     }
 
     public void loginDataChanged(String username, String password) {
