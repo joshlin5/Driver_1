@@ -20,21 +20,30 @@ import androidx.fragment.app.DialogFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
+import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.List;
+import java.util.Vector;
 
 public class ApplySponsorFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
-    // The EditText for the Dialog
-    int sponsorId;
-    Spinner sponsors;
-    int driverId;
+    int sponsorSelectedId;
+    Spinner sponsorSpinner;
+    int driverId = 1;
+    List<JSONObject> sponsorList = new ArrayList<>();
+    ArrayList<String> sponsorNameList = new ArrayList<>();
 
     // Base URL for fetching the weather report data
-    private final String WEBAPI_BASE_URL = "https://driver1-web-app.herokuapp.com/api";
+    private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors";
+    private final String Application_BASE_URL = "https://driver1-web-app.herokuapp.com/api/application";
     // Tag for error messages
     private final String TAG = "Application Post";
     // Sends the fetch request to the main thread
@@ -59,17 +68,38 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
 
         mRequestQueue = Volley.newRequestQueue(getContext());
-        // The Edit Text that I need to get the changed data from
-        sponsors = inflater.findViewById(R.id.sponsorSpinner);
 
-        sponsors.setOnItemSelectedListener(this);
+        // Builds the final URL for api data fetching
+        String sponsorUrl = Uri.parse(SPONSOR_BASE_URL).buildUpon().build().toString();
+
+        // Requests the location data and puts it on the queue
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.GET, sponsorUrl, null, response -> {
+                    // Stores data into a Dictionary and sends it to the listener
+                    try {
+                        JSONArray sponsorArray = response.getJSONArray("");
+                        for (int i = 0; i < sponsorArray.length(); i++) {
+                            JSONObject sponsor = sponsorArray.getJSONObject(i);
+                            sponsorNameList.add(sponsor.getString("sponsor_name"));
+                            sponsorList.add(sponsor);
+                            // Test for correct response?
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {});
+
+        mRequestQueue.add(request);
+        // The Edit Text that I need to get the changed data from
+        sponsorSpinner = inflater.findViewById(R.id.sponsorSpinner);
+        sponsorSpinner.setOnItemSelectedListener(this);
+        sponsorSpinner.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sponsorNameList);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        sponsors.setAdapter(adapter);
+        sponsorSpinner.setAdapter(adapter);
 
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
@@ -77,21 +107,20 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // Builds the final URL for api data fetching
-                        String url = Uri.parse(WEBAPI_BASE_URL).buildUpon()
-                                .appendQueryParameter("driver_id", String.valueOf(driverId))
-                                .appendQueryParameter("sponsor_id", String.valueOf(sponsorId)).build().toString();
-
+                        String url = Uri.parse(Application_BASE_URL).buildUpon().build().toString();
+                        JSONObject body = new JSONObject();
+                        try {
+                            //input your API parameters
+                            body.put("driver_id", Integer.toString(driverId));
+                            body.put("sponsor_id",Integer.toString(sponsorSelectedId));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         // Requests the location data and puts it on the queue
                         JsonObjectRequest request = new JsonObjectRequest
-                                (Request.Method.POST, url, null, response -> {
-                                    // Stores data into a Dictionary and sends it to the listener
-                                    Dictionary weatherReport = parseJsonSubjects(response);
-                                    try {
-                                        listener.onWeatherRequest(weatherReport);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }, error -> listener.onErrorResponse(error));
+                                (Request.Method.POST, url, body, response -> {
+                                    // Test for correct response?
+                                }, error -> {});
 
                         mRequestQueue.add(request);
                     }
@@ -106,13 +135,12 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        sponsorSelectedId = (int) id;
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    // Get list of all sponsors
     // Beside sponsors have a details button where they can find more details about the sponsor
 }
