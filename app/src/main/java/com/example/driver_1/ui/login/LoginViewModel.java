@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.data.LoginRepository;
@@ -21,6 +22,9 @@ import com.example.driver_1.data.Result;
 import com.example.driver_1.data.loggedInDriver.MainActivity;
 import com.example.driver_1.data.model.LoggedInUser;
 import com.example.driver_1.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +52,35 @@ public class LoginViewModel extends ViewModel {
         String url = "https://driver1-web-app.herokuapp.com/api/authenticate/";
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
+
+        /*JSONObject body = new JSONObject();
+        try {
+            //input your API parameters
+            body.put("email", username);
+            body.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.POST, url, body, response -> {
+                    // Test for correct response?
+                }, error -> {});
+
+        queue.add(request);
+// Request a string response from the provided URL.
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, body, response -> {
+            try {
+                // Driver object obtained from successful login
+                JSONObject driverInfo = response.getJSONObject("response");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //getUserInfo(response, c);
+        }, error ->{});
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);*/
+
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

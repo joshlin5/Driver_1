@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -35,8 +36,9 @@ import java.util.List;
 import java.util.Vector;
 
 public class ApplySponsorFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
-    int sponsorSelectedId;
+    int sponsorSelectedId = 1;
     Spinner sponsorSpinner;
+    Button detailButton;
     int driverId = 1;
     List<JSONObject> sponsorList = new ArrayList<>();
     ArrayList<String> sponsorNameList = new ArrayList<>();
@@ -66,7 +68,23 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
         builder.setTitle("Create Application");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
-
+        detailButton = inflater.findViewById(R.id.sponsor_details);
+        detailButton.setOnClickListener(v -> {
+            String sponsorName = "";
+            String exchangeRate = "";
+            Bundle data = new Bundle();
+            try {
+                sponsorName = sponsorList.get(sponsorSelectedId).getString("sponsor_name");
+                exchangeRate = sponsorList.get(sponsorSelectedId).getString("exchange_rate");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            data.putInt("sponsorId", sponsorSelectedId);
+            data.putString("sponsor_name", sponsorName);
+            data.putString("exchange_rate", exchangeRate);
+            getChildFragmentManager().setFragmentResult("requestKey", data);
+            new SponsorDetailFragment().show(getChildFragmentManager(), "Sponsor Detail");
+        });
         mRequestQueue = Volley.newRequestQueue(getContext());
 
         // Builds the final URL for api data fetching
@@ -77,10 +95,11 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                 (Request.Method.GET, sponsorUrl, null, response -> {
                     // Stores data into a Dictionary and sends it to the listener
                     try {
-                        JSONArray sponsorArray = response.getJSONArray("");
+                        JSONArray sponsorArray = response.getJSONArray("response");
                         for (int i = 0; i < sponsorArray.length(); i++) {
                             JSONObject sponsor = sponsorArray.getJSONObject(i);
                             sponsorNameList.add(sponsor.getString("sponsor_name"));
+                            System.out.print("SPONSOR NAMES: " + sponsorNameList.get(0));
                             sponsorList.add(sponsor);
                             // Test for correct response?
                         }
@@ -88,18 +107,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         e.printStackTrace();
                     }
                 }, error -> {});
-
         mRequestQueue.add(request);
-        // The Edit Text that I need to get the changed data from
-        sponsorSpinner = inflater.findViewById(R.id.sponsorSpinner);
-        sponsorSpinner.setOnItemSelectedListener(this);
-        sponsorSpinner.setOnItemSelectedListener(this);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sponsorNameList);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        sponsorSpinner.setAdapter(adapter);
 
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
@@ -117,12 +125,12 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                             e.printStackTrace();
                         }
                         // Requests the location data and puts it on the queue
-                        JsonObjectRequest request = new JsonObjectRequest
+                        JsonObjectRequest request2 = new JsonObjectRequest
                                 (Request.Method.POST, url, body, response -> {
                                     // Test for correct response?
                                 }, error -> {});
 
-                        mRequestQueue.add(request);
+                        mRequestQueue.add(request2);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -130,6 +138,18 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         // No action required if canceled
                     }
                 });
+
+        // The Edit Text that I need to get the changed data from
+        sponsorSpinner = inflater.findViewById(R.id.sponsorSpinner);
+        sponsorSpinner.setOnItemSelectedListener(this);
+        sponsorSpinner.setOnItemSelectedListener(this);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sponsorNameList);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sponsorSpinner.setAdapter(adapter);
+
         return builder.create();
     }
 
