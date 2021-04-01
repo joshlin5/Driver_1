@@ -53,34 +53,6 @@ public class LoginViewModel extends ViewModel {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
 
-        /*JSONObject body = new JSONObject();
-        try {
-            //input your API parameters
-            body.put("email", username);
-            body.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest
-                (Request.Method.POST, url, body, response -> {
-                    // Test for correct response?
-                }, error -> {});
-
-        queue.add(request);
-// Request a string response from the provided URL.
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, body, response -> {
-            try {
-                // Driver object obtained from successful login
-                JSONObject driverInfo = response.getJSONObject("response");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //getUserInfo(response, c);
-        }, error ->{});
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
-
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -90,7 +62,11 @@ public class LoginViewModel extends ViewModel {
                         // Display the response string.
 
                         // get JSONObject from JSON file
-                        //JSONObject obj = new JSONObject(response.toString());
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         //String temp = obj.toString();
 

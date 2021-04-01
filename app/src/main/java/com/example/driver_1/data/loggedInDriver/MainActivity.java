@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +47,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        // Set the side drawer text fields
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView drawerEmail = (TextView) headerView.findViewById(R.id.drawerEmail);
+        drawerEmail.setText(prefs.getString("email", "email"));
+        TextView drawerName = (TextView) headerView.findViewById(R.id.drawerName);
+        drawerName.setText(prefs.getString("username", "username"));
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -73,7 +80,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(MenuItem item) {
-        Intent intent = new Intent(this, LoginActivity.class);
+
+        /*FragmentManager manager = getFragmentManager();
+        LogoutFragmentDialog dialog = new LogoutFragmentDialog();
+        dialog.show(manager, "logoutFragmentDialog");*/
+
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 }

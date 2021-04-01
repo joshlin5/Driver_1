@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment{
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
-    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sideDrawerEmail, sponsorText;
+    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText;
     // Strings for the TextViews that need to be changed
     String username, address, phoneNumber, email, age, gender, sponsor;
 
@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment{
         // Getting the layout associated with this file
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        this.getActivity();
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
@@ -52,9 +51,9 @@ public class HomeFragment extends Fragment{
         age = String.valueOf(prefs.getInt("age", 0));
         ageText.setText(age);
         genderText = root.findViewById(R.id.genderTextView);
-        sideDrawerEmail = root.findViewById(R.id.drawerEmail);
+
         sponsorText = root.findViewById(R.id.sponsor);
-        //sideDrawerEmail.setText(email);
+
 
         // Initialize the Buttons
         editProfileButton = root.findViewById(R.id.editProfile);

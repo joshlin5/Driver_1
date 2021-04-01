@@ -26,14 +26,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
 import com.example.driver_1.data.loggedInDriver.MainActivity;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         //String temp = obj.toString();
 
-
+                        String a = response;
 
                     }
                 }, new Response.ErrorListener() {
@@ -108,6 +107,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         }) {
+            // The object to be sent with the post request is constructed here
+            @NotNull
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
