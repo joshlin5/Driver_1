@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Patterns;
 
@@ -58,18 +59,10 @@ public class LoginViewModel extends ViewModel {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // get JSONObject from JSON file
-                        // Display the response string.
-
-                        // get JSONObject from JSON file
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        //String temp = obj.toString();
-
+                        SharedPreferences prefs = c.getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("email", username);
+                        editor.apply();
                         getUserInfo(response, c);
 
                     }
@@ -121,8 +114,28 @@ public class LoginViewModel extends ViewModel {
         return password != null;
     }
 
-    public void getUserInfo(String userId, Context c){
-        String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
+    public void getUserInfo(String info, Context c){
+        SharedPreferences prefs = c.getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        try {
+            JSONObject obj = new JSONObject(info);
+            JSONObject temp = obj.getJSONObject("response");
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("username", temp.getString("name"));
+            editor.putString("address", temp.getString("address"));
+            editor.putString("phoneNumber", temp.getString("phone"));
+            //editor.putInt("age", temp.getInt("age"));
+            editor.putString("sponsor", temp.getString("sponsor"));
+            editor.putInt("points", temp.getInt("credits"));
+            editor.apply();
+            Result<LoggedInUser> result = loginRepository.login(info);
+            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            c.startActivity(new Intent(c.getApplicationContext(), MainActivity.class));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
 // Request a string response from the provided URL.
@@ -157,6 +170,6 @@ public class LoginViewModel extends ViewModel {
 
 
 // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        queue.add(stringRequest);*/
     }
 }
