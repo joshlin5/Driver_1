@@ -14,26 +14,24 @@ import com.example.driver_1.R;
 
 public class SponsorDetailFragment extends DialogFragment {
     int sponsorId;
-    String sponsorName;
-    String exchangeRate;
+    String sponsorName = "Bob";
+    int exchangeRate = 1;
     TextView nameText, exchangeText;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {// Making a new dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Create Application");
+        builder.setTitle("Details");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_detail, (ViewGroup) getView(), false);
         nameText = inflater.findViewById(R.id.sponsorName);
         exchangeText = inflater.findViewById(R.id.sponsorExchangeRate);
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {
             sponsorId = bundle.getInt("sponsorId");
-            sponsorName = bundle.getString("sponsor_name");
-            exchangeRate = bundle.getString("exchange_rate");
+            nameText.setText("Company Name: " + bundle.getString("sponsor_name"));
+            exchangeText.setText("Exchange rate: " + Integer.toString(bundle.getInt("exchange_rate")));
                 });
 
-        nameText.setText(sponsorName);
-        exchangeText.setText("Exchange rate: " + exchangeText);
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

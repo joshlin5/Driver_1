@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,13 @@ import androidx.fragment.app.DialogFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
 import org.json.JSONException;
@@ -32,7 +36,9 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class ApplySponsorFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
@@ -44,8 +50,8 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
     ArrayList<String> sponsorNameList = new ArrayList<>();
 
     // Base URL for fetching the weather report data
-    private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors";
-    private final String Application_BASE_URL = "https://driver1-web-app.herokuapp.com/api/application";
+    private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
+    private final String Application_BASE_URL = "https://driver1-web-app.herokuapp.com/api/application/";
     // Tag for error messages
     private final String TAG = "Application Post";
     // Sends the fetch request to the main thread
@@ -65,31 +71,34 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Making a new dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Create Application");
+        builder.setTitle("Sponsor Application Form");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
         detailButton = inflater.findViewById(R.id.sponsor_details);
         detailButton.setOnClickListener(v -> {
-            String sponsorName = "";
-            String exchangeRate = "";
             Bundle data = new Bundle();
+            data.putInt("sponsorId", sponsorSelectedId);
             try {
-                sponsorName = sponsorList.get(sponsorSelectedId).getString("sponsor_name");
-                exchangeRate = sponsorList.get(sponsorSelectedId).getString("exchange_rate");
+                System.out.println("APPLICATION SPONSOR NAME: " + sponsorList.get(sponsorSelectedId).getString("sponsor_name"));
+                data.putString("sponsor_name", sponsorList.get(sponsorSelectedId).getString("sponsor_name"));
+                data.putInt("exchange_rate", sponsorList.get(sponsorSelectedId).getInt("exchange_rate"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            data.putInt("sponsorId", sponsorSelectedId);
-            data.putString("sponsor_name", sponsorName);
-            data.putString("exchange_rate", exchangeRate);
             getChildFragmentManager().setFragmentResult("requestKey", data);
             new SponsorDetailFragment().show(getChildFragmentManager(), "Sponsor Detail");
         });
         mRequestQueue = Volley.newRequestQueue(getContext());
 
+
+        // The Edit Text that I need to get the changed data from
+        sponsorSpinner = inflater.findViewById(R.id.sponsorSpinner);
+        sponsorSpinner.setOnItemSelectedListener(this);
+        sponsorSpinner.setOnItemSelectedListener(this);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+
         // Builds the final URL for api data fetching
         String sponsorUrl = Uri.parse(SPONSOR_BASE_URL).buildUpon().build().toString();
-
         // Requests the location data and puts it on the queue
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.GET, sponsorUrl, null, response -> {
@@ -99,10 +108,15 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         for (int i = 0; i < sponsorArray.length(); i++) {
                             JSONObject sponsor = sponsorArray.getJSONObject(i);
                             sponsorNameList.add(sponsor.getString("sponsor_name"));
-                            System.out.print("SPONSOR NAMES: " + sponsorNameList.get(0));
+                            System.out.println("SPONSOR NAMES: " + sponsorNameList.get(0));
                             sponsorList.add(sponsor);
                             // Test for correct response?
                         }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sponsorNameList);
+                        // Specify the layout to use when the list of choices appears
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        // Apply the adapter to the spinner
+                        sponsorSpinner.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -118,9 +132,9 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         String url = Uri.parse(Application_BASE_URL).buildUpon().build().toString();
                         JSONObject body = new JSONObject();
                         try {
-                            //input your API parameters
-                            body.put("driver_id", Integer.toString(driverId));
-                            body.put("sponsor_id",Integer.toString(sponsorSelectedId));
+                            //POST JSON body
+                            body.put("driver_id", 1);
+                            body.put("sponsor_id", 1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -128,8 +142,36 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         JsonObjectRequest request2 = new JsonObjectRequest
                                 (Request.Method.POST, url, body, response -> {
                                     // Test for correct response?
-                                }, error -> {});
+                                }, error -> {}
+                        );
+                        /*StringRequest request2 = new StringRequest(Request.Method.POST, url,
+                                new Response.Listener<String>()
+                                {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        // response
+                                        Log.d("Response", response);
+                                    }
+                                },
+                                new Response.ErrorListener()
+                                {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        // error
+                                        Log.d("Error.Response", String.valueOf(error));
+                                    }
+                                }
+                        ) {
+                            @Override
+                            protected Map<String, String> getParams()
+                            {
+                                Map<String, String>  params = new HashMap<String, String>();
+                                params.put("driver_id", "1");
+                                params.put("sponsor_id", "1");
 
+                                return params;
+                            }
+                        };*/
                         mRequestQueue.add(request2);
                     }
                 })
@@ -138,17 +180,6 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         // No action required if canceled
                     }
                 });
-
-        // The Edit Text that I need to get the changed data from
-        sponsorSpinner = inflater.findViewById(R.id.sponsorSpinner);
-        sponsorSpinner.setOnItemSelectedListener(this);
-        sponsorSpinner.setOnItemSelectedListener(this);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sponsorNameList);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        sponsorSpinner.setAdapter(adapter);
 
         return builder.create();
     }
