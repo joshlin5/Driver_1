@@ -115,6 +115,7 @@ public class LoginViewModel extends ViewModel {
         return password != null;
     }
 
+
     public void getUserInfo(String info, Context c){
         SharedPreferences prefs = c.getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         try {
@@ -139,41 +140,5 @@ public class LoginViewModel extends ViewModel {
             e.printStackTrace();
         }
 
-        /*String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(c);
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // get JSONObject from JSON file
-                        // Display the response string.
-
-                        // get JSONObject from JSON file
-                        //JSONObject obj = new JSONObject(response.toString());
-
-                        //String temp = obj.toString();
-
-                        // Call with response as JSON will contain the driver info
-                        Result<LoggedInUser> result = loginRepository.login(response);
-                        LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-                        loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-                        c.startActivity(new Intent(c.getApplicationContext(), MainActivity.class));
-
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.d("TAG", "" + error.getMessage() + "," + error.toString());
-
-            }
-        });
-
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
     }
 }
