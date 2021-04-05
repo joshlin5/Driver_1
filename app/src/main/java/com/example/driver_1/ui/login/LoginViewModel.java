@@ -32,6 +32,7 @@ import java.util.Map;
 
 public class LoginViewModel extends ViewModel {
 
+    private final String TAG = "LoginViewModel";
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
@@ -69,8 +70,8 @@ public class LoginViewModel extends ViewModel {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.d("TAG", ""+error.getMessage()+","+error.toString());
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, ""+error.getMessage()+","+error.toString());
 
             }
         }) {
@@ -127,6 +128,8 @@ public class LoginViewModel extends ViewModel {
             //editor.putInt("age", temp.getInt("age"));
             editor.putString("sponsor", temp.getString("sponsor"));
             editor.putInt("points", temp.getInt("credits"));
+            editor.putString("gender", temp.getString("gender"));
+            editor.putString("sponsorId", temp.getString("sponsor"));
             editor.apply();
             Result<LoggedInUser> result = loginRepository.login(info);
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
