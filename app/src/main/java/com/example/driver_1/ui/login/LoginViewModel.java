@@ -120,6 +120,7 @@ public class LoginViewModel extends ViewModel {
             JSONObject obj = new JSONObject(info);
             JSONObject temp = obj.getJSONObject("response");
             SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("id", temp.getString("id"));
             editor.putString("username", temp.getString("name"));
             editor.putString("address", temp.getString("address"));
             editor.putString("phoneNumber", temp.getString("phone"));
