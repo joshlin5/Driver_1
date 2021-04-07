@@ -2,10 +2,12 @@ package com.example.driver_1.ui.home;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -15,44 +17,69 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
 //import com.example.driver_1.ui.editProfile.EditProfileFragment;
 // Purchase status
 public class HomeFragment extends Fragment{
 
+    int driverID, sponsorID;
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
-    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText;
+    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText, pointsText;
     // Strings for the TextViews that need to be changed
     String username, address, phoneNumber, email, age, gender, sponsor;
+    private RequestQueue mRequestQueue ;
+    private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
 
     // Initializes Buttons and TextViews
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Getting the layout associated with this file
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        mRequestQueue = Volley.newRequestQueue(getContext());
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        driverID = prefs.getInt("id", -1);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
-        usernameText.setText(prefs.getString("username", "username"));
+        usernameText.setText(prefs.getString("username", "ERROR"));
         addressText = root.findViewById(R.id.addressTextView);
-        addressText.setText(prefs.getString("address", "address"));
+        addressText.setText(prefs.getString("address", "ERROR"));
         phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
-        phoneNumberText.setText(prefs.getString("phoneNumber", "111-111-1111"));
+        phoneNumberText.setText(prefs.getString("phoneNumber", "ERROR"));
         emailText = root.findViewById(R.id.emailTextView);
-        emailText.setText(prefs.getString("email", "email"));
+        emailText.setText(prefs.getString("email", "ERROR"));
         ageText = root.findViewById(R.id.ageTextView);
-        age = String.valueOf(prefs.getInt("age", 0));
+        age = String.valueOf(prefs.getInt("age", -1));
         ageText.setText(age);
         genderText = root.findViewById(R.id.genderTextView);
+        genderText.setText(prefs.getString("gender", "ERROR"));
+        pointsText = root.findViewById(R.id.points);
+        pointsText.setText(prefs.getInt("points", -1));
+
 
         sponsorText = root.findViewById(R.id.sponsor);
+        sponsorID = prefs.getInt("sponsorId", -1);
+
+        String sponsorUrl = Uri.parse(SPONSOR_BASE_URL + sponsorID).buildUpon().build().toString();
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.GET, sponsorUrl, null, response -> {
+                    // Stores data into a Dictionary and sends it to the listener
+                    try {
+                        sponsorText.setText(response.getString("sponsor_name"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {});
+        mRequestQueue.add(request);
+
 
 
         // Initialize the Buttons
