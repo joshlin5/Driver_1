@@ -4,7 +4,10 @@
 package com.example.driver_1.ui.home;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +20,22 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // The EditText for the Dialog
     EditText username, address, phoneNumber, email, age;
     Spinner gender;
     String genderResult = "Male";
+    private RequestQueue mRequestQueue ;
+    private final String DRIVER_BASE_URL = "https://driver1-web-app.herokuapp.com/api/drivers/";
 
     /**
      *
@@ -42,7 +54,9 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         builder.setTitle("Edit Profile");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_edit_profile, (ViewGroup) getView(), false);
-
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        mRequestQueue = Volley.newRequestQueue(getContext());
         // The Edit Text that I need to get the changed data from
         username = inflater.findViewById(R.id.usernameEditText);
         address = inflater.findViewById(R.id.addressEditText);
@@ -67,34 +81,61 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                     public void onClick(DialogInterface dialog, int id) {
                         // Getting data from the Edit Text and putting it in the Bundle
                         Bundle result = new Bundle();
-                        if(!username.getText().toString().equals("") && username.getText().toString().length() > 0)
-                            result.putString("username", username.getText().toString());
-                        else
-                            result.putString("username", "");
+                        JSONObject body = new JSONObject();
+                        try {
+                            String nameInput = username.getText().toString();
+                            String addressInput = address.getText().toString();
+                            String phoneNumberInput = phoneNumber.getText().toString();
+                            String emailInput = email.getText().toString();
+                            String ageInput = age.getText().toString();
+                            if(!nameInput.equals("") && nameInput.length() > 0) {
+                                result.putString("username", nameInput);
+                                editor.putString("username", nameInput);
+                                body.put("name", nameInput);
+                            }
+                            else {
+                                result.putString("username", "");
+                                body.put("name", prefs.getString("username", "ERROR"));
+                            }
 
-                        if(!address.getText().toString().equals("") && address.getText().toString().length() > 0)
-                            result.putString("address", address.getText().toString());
-                        else
-                            result.putString("address", "");
+                            if(!address.getText().toString().equals("") && address.getText().toString().length() > 0)
+                                result.putString("address", address.getText().toString());
+                            else
+                                result.putString("address", "");
 
-                        if(!phoneNumber.getText().toString().equals("") && phoneNumber.getText().toString().length() > 0)
-                            result.putString("phoneNumber", phoneNumber.getText().toString());
-                        else
-                            result.putString("phoneNumber", "");
+                            if(!phoneNumber.getText().toString().equals("") && phoneNumber.getText().toString().length() > 0)
+                                result.putString("phoneNumber", phoneNumber.getText().toString());
+                            else
+                                result.putString("phoneNumber", "");
 
-                        if(!email.getText().toString().equals("") && email.getText().toString().length() > 0)
-                            result.putString("email", email.getText().toString());
-                        else
-                            result.putString("email", "");
+                            if(!email.getText().toString().equals("") && email.getText().toString().length() > 0)
+                                result.putString("email", email.getText().toString());
+                            else
+                                result.putString("email", "");
 
-                        if(!age.getText().toString().equals("") && age.getText().toString().length() > 0)
-                            result.putString("age", age.getText().toString());
-                        else
-                            result.putString("age", "");
-
+                            if(!age.getText().toString().equals("") && age.getText().toString().length() > 0)
+                                result.putString("age", age.getText().toString());
+                            else
+                                result.putString("age", "");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         result.putString("gender", genderResult);
                         // Sending the data to the parent fragment (the HomeFragment.java)
                         getParentFragmentManager().setFragmentResult("EditProfileResult", result);
+
+
+                        /*String driverUrl = Uri.parse(DRIVER_BASE_URL + prefs.getInt("id", -1)).buildUpon().build().toString();
+                        JsonObjectRequest request = new JsonObjectRequest
+                                (Request.Method.PATCH, driverUrl, body, response -> {
+                                    // Stores data into a Dictionary and sends it to the listener
+                                    try {
+                                        sponsorText.setText(response.getString("sponsor_name"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }, error -> {});
+                        mRequestQueue.add(request);*/
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
