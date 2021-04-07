@@ -1,10 +1,22 @@
 package com.example.driver_1.data.store;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+
+import com.example.driver_1.data.ASyncResponse;
+import com.example.driver_1.data.RetrieveItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
 
 public class Item {
     private int mId;
     private String mName;
+    private Drawable mImage;
 
     // Default constructor
     public Item() {}
@@ -20,6 +32,17 @@ public class Item {
         mId = id;
         mName = name;
 
+    }
+
+    public Item(String info) {
+        try {
+            JSONObject obj = new JSONObject(info.toString());
+            mId = obj.getInt("id");
+            mName = obj.getString("name");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     // Below are getters and setters for this class
@@ -38,6 +61,14 @@ public class Item {
 
     public void setName(String name) {
         this.mName = name;
+    }
+
+    public Drawable getImage() {
+        return mImage;
+    }
+
+    public void setImage(Drawable mImage) {
+        this.mImage = mImage;
     }
 
 }

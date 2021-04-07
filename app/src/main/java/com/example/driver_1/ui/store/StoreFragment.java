@@ -2,6 +2,7 @@ package com.example.driver_1.ui.store;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.driver_1.R;
 import com.example.driver_1.data.store.Item;
+import com.example.driver_1.data.store.ItemDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +28,7 @@ import java.util.List;
 
 public class StoreFragment extends Fragment {
 
+    private final String TAG = "StoreFragment";
     private StoreViewModel storeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,13 +36,19 @@ public class StoreFragment extends Fragment {
         storeViewModel =
                 new ViewModelProvider(this).get(StoreViewModel.class);
         View root = inflater.inflate(R.layout.fragment_store, container, false);
+        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.store_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        TextView t = root.findViewById(R.id.storeName);
 
-        /*storeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        storeViewModel.getItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(List<Item> items) {
+                // Send Items to recycler view
+                ItemAdapter adapter = new ItemAdapter(items);
+                recyclerView.setAdapter(adapter);
             }
-        });*/
+        });
+
         return root;
     }
 
@@ -84,8 +94,8 @@ public class StoreFragment extends Fragment {
         public void bind(Item item) {
             mItem = item;
             //mItem.setTxt(mItemPic);
-            mNameTextView.setText("test");
-            //mItemPic.setImageDrawable();
+            mNameTextView.setText(item.getName());
+            mItemPic.setImageDrawable(item.getImage());
         }
 
         /** Adapted from ZyBooks
