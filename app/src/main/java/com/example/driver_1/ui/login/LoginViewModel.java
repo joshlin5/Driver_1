@@ -32,6 +32,7 @@ import java.util.Map;
 
 public class LoginViewModel extends ViewModel {
 
+    private final String TAG = "LoginViewModel";
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
@@ -69,8 +70,8 @@ public class LoginViewModel extends ViewModel {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.d("TAG", ""+error.getMessage()+","+error.toString());
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.d(TAG, ""+error.getMessage()+","+error.toString());
 
             }
         }) {
@@ -114,18 +115,22 @@ public class LoginViewModel extends ViewModel {
         return password != null;
     }
 
+
     public void getUserInfo(String info, Context c){
         SharedPreferences prefs = c.getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         try {
             JSONObject obj = new JSONObject(info);
             JSONObject temp = obj.getJSONObject("response");
             SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("id", temp.getString("id"));
             editor.putString("username", temp.getString("name"));
             editor.putString("address", temp.getString("address"));
             editor.putString("phoneNumber", temp.getString("phone"));
             //editor.putInt("age", temp.getInt("age"));
             editor.putString("sponsor", temp.getString("sponsor"));
             editor.putInt("points", temp.getInt("credits"));
+            editor.putString("gender", temp.getString("gender"));
+            editor.putString("sponsorId", temp.getString("sponsor"));
             editor.apply();
             Result<LoggedInUser> result = loginRepository.login(info);
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
@@ -135,41 +140,5 @@ public class LoginViewModel extends ViewModel {
             e.printStackTrace();
         }
 
-        /*String url = "https://driver1-web-app.herokuapp.com/api/drivers/" + "1";
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(c);
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // get JSONObject from JSON file
-                        // Display the response string.
-
-                        // get JSONObject from JSON file
-                        //JSONObject obj = new JSONObject(response.toString());
-
-                        //String temp = obj.toString();
-
-                        // Call with response as JSON will contain the driver info
-                        Result<LoggedInUser> result = loginRepository.login(response);
-                        LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-                        loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-                        c.startActivity(new Intent(c.getApplicationContext(), MainActivity.class));
-
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.d("TAG", "" + error.getMessage() + "," + error.toString());
-
-            }
-        });
-
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
     }
 }
