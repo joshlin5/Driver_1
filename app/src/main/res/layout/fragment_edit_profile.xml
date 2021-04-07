@@ -48,9 +48,9 @@
         android:textSize="20sp"
         android:text="@string/phone_numberTextView"
         app:layout_constraintTop_toBottomOf="@id/addressTextView"
-        app:layout_constraintBottom_toTopOf="@id/emailTextView"
+        app:layout_constraintBottom_toTopOf="@id/ageTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
-
+    <!-- >
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
@@ -61,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
         app:layout_constraintBottom_toTopOf="@id/ageTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
+        -->
 
     <TextView
         android:id="@+id/ageTextView"
@@ -69,7 +70,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="Age: "
-        app:layout_constraintTop_toBottomOf="@id/emailTextView"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
         app:layout_constraintBottom_toTopOf="@id/genderTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -116,7 +117,7 @@
         android:inputType="phone"
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
-
+    <!--
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
@@ -127,6 +128,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBaseline_toBaselineOf="@id/emailTextView"
         app:layout_constraintLeft_toRightOf="@id/emailTextView"/>
+        -->
 
     <EditText
         android:id="@+id/ageEditText"

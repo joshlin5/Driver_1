@@ -61,7 +61,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         username = inflater.findViewById(R.id.usernameEditText);
         address = inflater.findViewById(R.id.addressEditText);
         phoneNumber = inflater.findViewById(R.id.phoneNumberEditText);
-        email = inflater.findViewById(R.id.emailEditText);
+        //email = inflater.findViewById(R.id.emailEditText);
         age = inflater.findViewById(R.id.ageEditText);
 
         gender = (Spinner) inflater.findViewById(R.id.genderChoice);
@@ -86,7 +86,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                             String nameInput = username.getText().toString();
                             String addressInput = address.getText().toString();
                             String phoneNumberInput = phoneNumber.getText().toString();
-                            String emailInput = email.getText().toString();
+                            //String emailInput = email.getText().toString();
                             String ageInput = age.getText().toString();
                             if(!nameInput.equals("") && nameInput.length() > 0) {
                                 result.putString("username", nameInput);
@@ -98,44 +98,65 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                                 body.put("name", prefs.getString("username", "ERROR"));
                             }
 
-                            if(!address.getText().toString().equals("") && address.getText().toString().length() > 0)
-                                result.putString("address", address.getText().toString());
-                            else
+                            if(!addressInput.equals("") && addressInput.length() > 0) {
+                                result.putString("address", addressInput);
+                                editor.putString("address", addressInput);
+                                body.put("address", addressInput);
+                            }
+                            else {
                                 result.putString("address", "");
+                                body.put("address", prefs.getString("address", "ERROR"));
+                            }
 
-                            if(!phoneNumber.getText().toString().equals("") && phoneNumber.getText().toString().length() > 0)
-                                result.putString("phoneNumber", phoneNumber.getText().toString());
-                            else
+                            if(!phoneNumberInput.equals("") && phoneNumberInput.length() > 0) {
+                                result.putString("phoneNumber", phoneNumberInput);
+                                editor.putString("phoneNumber", phoneNumberInput);
+                                body.put("phone", phoneNumberInput);
+                            }
+                            else {
                                 result.putString("phoneNumber", "");
+                                body.put("phone", prefs.getString("phoneNumber", "ERROR"));
+                            }
 
-                            if(!email.getText().toString().equals("") && email.getText().toString().length() > 0)
-                                result.putString("email", email.getText().toString());
-                            else
+                            /*if(!emailInput.equals("") && emailInput.length() > 0) {
+                                result.putString("email", emailInput);
+                                editor.putString("phoneNumber", emailInput);
+                                //body.put("phone", emailInput);
+                            }
+                            else {
                                 result.putString("email", "");
+                                //body.put("phone", prefs.getString("phoneNumber", "ERROR"));
+                            }*/
 
-                            if(!age.getText().toString().equals("") && age.getText().toString().length() > 0)
-                                result.putString("age", age.getText().toString());
-                            else
+                            // Not sync with pref file and web server
+                            if(!ageInput.equals("") && ageInput.length() > 0) {
+                                result.putString("age", ageInput);
+                                //editor.putString("age", ageInput);
+                                //body.put("age", ageInput);
+                            }
+                            else {
                                 result.putString("age", "");
+                                //body.put("age", prefs.getString("age", "ERROR"));
+                            }
+
+                            // Need to implement
+                            body.put("qualifications", "Yes");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        // Not sync with web server
                         result.putString("gender", genderResult);
+                        editor.putString("gender", genderResult);
+
                         // Sending the data to the parent fragment (the HomeFragment.java)
                         getParentFragmentManager().setFragmentResult("EditProfileResult", result);
 
 
-                        /*String driverUrl = Uri.parse(DRIVER_BASE_URL + prefs.getInt("id", -1)).buildUpon().build().toString();
+                        String driverUrl = Uri.parse(DRIVER_BASE_URL + prefs.getInt("id", -1)).buildUpon().build().toString();
                         JsonObjectRequest request = new JsonObjectRequest
-                                (Request.Method.PATCH, driverUrl, body, response -> {
-                                    // Stores data into a Dictionary and sends it to the listener
-                                    try {
-                                        sponsorText.setText(response.getString("sponsor_name"));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }, error -> {});
-                        mRequestQueue.add(request);*/
+                                (Request.Method.PATCH, driverUrl, body, response -> {}, error -> {});
+                        mRequestQueue.add(request);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

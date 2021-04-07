@@ -30,13 +30,13 @@ import org.json.JSONObject;
 // Purchase status
 public class HomeFragment extends Fragment{
 
-    int driverID, sponsorID;
+    int driverID, sponsorID, age, points;
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
     TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText, pointsText;
     // Strings for the TextViews that need to be changed
-    String username, address, phoneNumber, email, age, gender, sponsor;
+    String username, address, phoneNumber, email, gender, sponsor;
     private RequestQueue mRequestQueue ;
     private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
 
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mRequestQueue = Volley.newRequestQueue(getContext());
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
-        //driverID = prefs.getInt("id", -1);
+        driverID = Integer.valueOf(prefs.getString("id", "-1"));
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
         usernameText.setText(prefs.getString("username", "ERROR"));
@@ -57,12 +57,13 @@ public class HomeFragment extends Fragment{
         emailText = root.findViewById(R.id.emailTextView);
         emailText.setText(prefs.getString("email", "ERROR"));
         ageText = root.findViewById(R.id.ageTextView);
-        age = String.valueOf(prefs.getInt("age", -1));
-        ageText.setText(age);
+        //age = (prefs.getInt("age", -1));
+        ageText.setText("Age: Error");
         genderText = root.findViewById(R.id.genderTextView);
         genderText.setText(prefs.getString("gender", "ERROR"));
         pointsText = root.findViewById(R.id.points);
-        //pointsText.setText(prefs.getInt("points", -1));
+        points = prefs.getInt("points", -1);
+        pointsText.setText(prefs.getInt("points", -1));
 
 
         sponsorText = root.findViewById(R.id.sponsor);
@@ -106,8 +107,8 @@ public class HomeFragment extends Fragment{
             username = bundle.getString("username");
             address = bundle.getString("address");
             phoneNumber = bundle.getString("phoneNumber");
-            email = prefs.getString("email", bundle.getString("email"));
-            age = bundle.getString("age");
+            //email = prefs.getString("email", bundle.getString("email"));
+            String ageTemp = bundle.getString("age");
             gender = bundle.getString("gender");
 
             // Sets data to corresponding TextViews in fragment_home.xml
@@ -117,10 +118,12 @@ public class HomeFragment extends Fragment{
                 addressText.setText("Address: " + address);
             if(!phoneNumber.equals(""))
                 phoneNumberText.setText("Phone Number: " + phoneNumber);
-            if(!email.equals(""))
-                emailText.setText("Email: " + email);
-            if(!age.equals(""))
+            //if(!email.equals(""))
+            //    emailText.setText("Email: " + email);
+            if(!ageTemp.equals("")) {
+                age = Integer.valueOf(ageTemp);
                 ageText.setText("Age: " + age);
+            }
             genderText.setText("Gender: " + gender);
         });
         return root;
