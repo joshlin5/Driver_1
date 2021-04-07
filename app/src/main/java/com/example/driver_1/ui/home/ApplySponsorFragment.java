@@ -4,7 +4,9 @@
 package com.example.driver_1.ui.home;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,9 +47,9 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
     int sponsorSelectedId = 1;
     Spinner sponsorSpinner;
     Button detailButton;
-    int driverId = 1;
     List<JSONObject> sponsorList = new ArrayList<>();
     ArrayList<String> sponsorNameList = new ArrayList<>();
+    SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
 
     // Base URL for fetching the weather report data
     private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
@@ -133,8 +135,8 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         JSONObject body = new JSONObject();
                         try {
                             //POST JSON body
-                            body.put("driver_id", 1);
-                            body.put("sponsor_id", 1);
+                            body.put("driver_id", prefs.getInt("id", 1));
+                            body.put("sponsor_id", sponsorSelectedId);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -144,34 +146,6 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                                     // Test for correct response?
                                 }, error -> {}
                         );
-                        /*StringRequest request2 = new StringRequest(Request.Method.POST, url,
-                                new Response.Listener<String>()
-                                {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        // response
-                                        Log.d("Response", response);
-                                    }
-                                },
-                                new Response.ErrorListener()
-                                {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        // error
-                                        Log.d("Error.Response", String.valueOf(error));
-                                    }
-                                }
-                        ) {
-                            @Override
-                            protected Map<String, String> getParams()
-                            {
-                                Map<String, String>  params = new HashMap<String, String>();
-                                params.put("driver_id", "1");
-                                params.put("sponsor_id", "1");
-
-                                return params;
-                            }
-                        };*/
                         mRequestQueue.add(request2);
                     }
                 })
@@ -193,5 +167,4 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    // Beside sponsors have a details button where they can find more details about the sponsor
 }
