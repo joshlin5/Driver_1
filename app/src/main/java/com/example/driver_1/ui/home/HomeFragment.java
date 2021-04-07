@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mRequestQueue = Volley.newRequestQueue(getContext());
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
-        driverID = prefs.getInt("id", -1);
+        //driverID = prefs.getInt("id", -1);
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
         usernameText.setText(prefs.getString("username", "ERROR"));
@@ -62,11 +62,11 @@ public class HomeFragment extends Fragment{
         genderText = root.findViewById(R.id.genderTextView);
         genderText.setText(prefs.getString("gender", "ERROR"));
         pointsText = root.findViewById(R.id.points);
-        pointsText.setText(prefs.getInt("points", -1));
+        //pointsText.setText(prefs.getInt("points", -1));
 
 
         sponsorText = root.findViewById(R.id.sponsor);
-        sponsorID = prefs.getInt("sponsorId", -1);
+        //sponsorID = prefs.getInt("sponsorId", -1);
 
         String sponsorUrl = Uri.parse(SPONSOR_BASE_URL + sponsorID).buildUpon().build().toString();
         JsonObjectRequest request = new JsonObjectRequest
