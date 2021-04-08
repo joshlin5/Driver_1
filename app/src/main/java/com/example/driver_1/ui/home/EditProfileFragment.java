@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // The EditText for the Dialog
+    String driverId;
     EditText username, address, phoneNumber, email, age, qualification;
     Spinner gender;
     String genderResult = "Male";
@@ -56,6 +57,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_edit_profile, (ViewGroup) getView(), false);
         SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+        driverId = prefs.getString("id", "ERROR");
         mRequestQueue = Volley.newRequestQueue(getContext());
         // The Edit Text that I need to get the changed data from
         username = inflater.findViewById(R.id.usernameEditText);
@@ -143,12 +145,12 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
 
                             // Not sync with pref file and web server
                             if(!qualiInput.equals("") && qualiInput.length() > 0) {
-                                result.putString("age", qualiInput);
+                                result.putString("qualifications", qualiInput);
                                 //editor.putString("age", qualiInput);
                                 body.put("qualifications", qualiInput);
                             }
                             else {
-                                result.putString("age", "");
+                                result.putString("qualifications", "");
                                 body.put("qualifications", "None");
                             }
                         } catch (JSONException e) {
@@ -163,7 +165,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                         getParentFragmentManager().setFragmentResult("EditProfileResult", result);
 
 
-                        String driverUrl = Uri.parse(DRIVER_BASE_URL + prefs.getInt("id", -1)).buildUpon().build().toString();
+                        String driverUrl = Uri.parse(DRIVER_BASE_URL + driverId).buildUpon().build().toString();
                         JsonObjectRequest request = new JsonObjectRequest
                                 (Request.Method.PATCH, driverUrl, body, response -> {}, error -> {});
                         mRequestQueue.add(request);

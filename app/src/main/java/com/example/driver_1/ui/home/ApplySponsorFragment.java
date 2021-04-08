@@ -49,7 +49,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
     Button detailButton;
     List<JSONObject> sponsorList = new ArrayList<>();
     ArrayList<String> sponsorNameList = new ArrayList<>();
-    SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+    SharedPreferences prefs;
 
     // Base URL for fetching the weather report data
     private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
@@ -76,6 +76,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
         builder.setTitle("Sponsor Application Form");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
+        prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         detailButton = inflater.findViewById(R.id.sponsor_details);
         detailButton.setOnClickListener(v -> {
             Bundle data = new Bundle();

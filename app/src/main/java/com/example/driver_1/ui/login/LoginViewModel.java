@@ -129,7 +129,9 @@ public class LoginViewModel extends ViewModel {
             //editor.putInt("age", temp.getInt("age"));
             editor.putString("sponsor", temp.getString("sponsor"));
             editor.putInt("points", temp.getInt("credits"));
-            editor.putString("gender", temp.getString("gender"));
+            //editor.putString("gender", temp.getString("gender"));
+            // Web server doesn't return gender so I put in a hard coded version
+            editor.putString("gender", "Male");
             editor.putString("sponsorId", temp.getString("sponsor"));
             editor.apply();
             Result<LoggedInUser> result = loginRepository.login(info);
