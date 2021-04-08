@@ -108,11 +108,22 @@
         android:textAlignment="center"
         android:textSize="30sp"
         android:text="Points: 10"
-        app:layout_constraintTop_toBottomOf="@id/resetPassword"
-        app:layout_constraintBottom_toTopOf="@id/resetPassword"
+        app:layout_constraintTop_toBottomOf="@id/sponsor"
+        app:layout_constraintBottom_toTopOf="@id/qualiTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <TextView
+        android:id="@+id/qualiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:text="Qualifications: No Crashes, Voted Best Driver, 100 years of truck driving experience"
+        app:layout_constraintTop_toBottomOf="@id/points"
+        app:layout_constraintBottom_toTopOf="@id/resetPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/resetPassword"

@@ -34,9 +34,9 @@ public class HomeFragment extends Fragment{
     // Buttons in fragment_home.xml
     Button resetPasswordButton, editProfileButton, applySponsor;
     // TextViews that need to be edited after edit profile
-    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText, pointsText;
+    TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText, pointsText, qualiText;
     // Strings for the TextViews that need to be changed
-    String username, address, phoneNumber, email, gender, sponsor;
+    String username, address, phoneNumber, email, gender, sponsor, qualifications;
     private RequestQueue mRequestQueue ;
     private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
 
@@ -50,6 +50,8 @@ public class HomeFragment extends Fragment{
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
         usernameText.setText(prefs.getString("username", "ERROR"));
+        qualiText = root.findViewById(R.id.qualiTextView);
+        //qualiText.setText(prefs.getString("qualification", "ERROR"));
         addressText = root.findViewById(R.id.addressTextView);
         addressText.setText(prefs.getString("address", "ERROR"));
         phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
@@ -108,8 +110,10 @@ public class HomeFragment extends Fragment{
             address = bundle.getString("address");
             phoneNumber = bundle.getString("phoneNumber");
             //email = prefs.getString("email", bundle.getString("email"));
+            // Currently age is not in shared pref file so cannot update it
             String ageTemp = bundle.getString("age");
             gender = bundle.getString("gender");
+            qualifications = bundle.getString(("qualifications"));
 
             // Sets data to corresponding TextViews in fragment_home.xml
             if(!username.equals(""))
@@ -124,6 +128,8 @@ public class HomeFragment extends Fragment{
                 age = Integer.valueOf(ageTemp);
                 ageText.setText("Age: " + age);
             }
+            if(!qualifications.equals(""))
+                qualiText.setText("Qualifications: " + qualifications);
             genderText.setText("Gender: " + gender);
         });
         return root;

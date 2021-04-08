@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // The EditText for the Dialog
-    EditText username, address, phoneNumber, email, age;
+    EditText username, address, phoneNumber, email, age, qualification;
     Spinner gender;
     String genderResult = "Male";
     private RequestQueue mRequestQueue ;
@@ -61,6 +61,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         username = inflater.findViewById(R.id.usernameEditText);
         address = inflater.findViewById(R.id.addressEditText);
         phoneNumber = inflater.findViewById(R.id.phoneNumberEditText);
+        qualification = inflater.findViewById(R.id.qualiEditText);
         //email = inflater.findViewById(R.id.emailEditText);
         age = inflater.findViewById(R.id.ageEditText);
 
@@ -86,6 +87,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                             String nameInput = username.getText().toString();
                             String addressInput = address.getText().toString();
                             String phoneNumberInput = phoneNumber.getText().toString();
+                            String qualiInput = qualification.getText().toString();
                             //String emailInput = email.getText().toString();
                             String ageInput = age.getText().toString();
                             if(!nameInput.equals("") && nameInput.length() > 0) {
@@ -139,8 +141,16 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                                 //body.put("age", prefs.getString("age", "ERROR"));
                             }
 
-                            // Need to implement
-                            body.put("qualifications", "Yes");
+                            // Not sync with pref file and web server
+                            if(!qualiInput.equals("") && qualiInput.length() > 0) {
+                                result.putString("age", qualiInput);
+                                //editor.putString("age", qualiInput);
+                                body.put("qualifications", qualiInput);
+                            }
+                            else {
+                                result.putString("age", "");
+                                body.put("qualifications", "None");
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

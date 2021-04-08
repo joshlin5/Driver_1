@@ -48,8 +48,20 @@
         android:textSize="20sp"
         android:text="@string/phone_numberTextView"
         app:layout_constraintTop_toBottomOf="@id/addressTextView"
+        app:layout_constraintBottom_toTopOf="@id/qualiTextView"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/qualiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Qualifications: "
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
         app:layout_constraintBottom_toTopOf="@id/ageTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
     <!-- >
     <TextView
         android:id="@+id/emailTextView"
@@ -70,7 +82,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="Age: "
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
+        app:layout_constraintTop_toBottomOf="@id/qualiTextView"
         app:layout_constraintBottom_toTopOf="@id/genderTextView"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -117,6 +129,18 @@
         android:inputType="phone"
         app:layout_constraintBaseline_toBaselineOf="@id/phoneNumberTextView"
         app:layout_constraintLeft_toRightOf="@id/phoneNumberTextView"/>
+
+    <EditText
+        android:id="@+id/qualiEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:hint="Never crashed..."
+        android:inputType="textAutoComplete"
+        app:layout_constraintBaseline_toBaselineOf="@id/qualiTextView"
+        app:layout_constraintLeft_toRightOf="@id/qualiTextView"/>
+
     <!--
     <EditText
         android:id="@+id/emailEditText"
