@@ -49,15 +49,15 @@ public class HomeFragment extends Fragment{
         driverID = Integer.valueOf(prefs.getString("id", "-1"));
         // Initialize the TextViews
         usernameText = root.findViewById(R.id.usernameTextView);
-        usernameText.setText(prefs.getString("username", "ERROR"));
+        usernameText.setText("Name: " + prefs.getString("username", "ERROR"));
         qualiText = root.findViewById(R.id.qualiTextView);
         //qualiText.setText(prefs.getString("qualification", "ERROR"));
         addressText = root.findViewById(R.id.addressTextView);
-        addressText.setText(prefs.getString("address", "ERROR"));
+        addressText.setText("Address: " + prefs.getString("address", "ERROR"));
         phoneNumberText = root.findViewById(R.id.phoneNumberTextView);
-        phoneNumberText.setText(prefs.getString("phoneNumber", "ERROR"));
+        phoneNumberText.setText("Phone Number: " + prefs.getString("phoneNumber", "ERROR"));
         emailText = root.findViewById(R.id.emailTextView);
-        emailText.setText(prefs.getString("email", "ERROR"));
+        emailText.setText("Email: " + prefs.getString("email", "ERROR"));
         ageText = root.findViewById(R.id.ageTextView);
         //age = (prefs.getInt("age", -1));
         ageText.setText("Age: Error");
@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment{
                 (Request.Method.GET, sponsorUrl, null, response -> {
                     // Stores data into a Dictionary and sends it to the listener
                     try {
-                        sponsorText.setText(response.getString("sponsor_name"));
+                        sponsorText.setText("Sponsor Company: " + response.getString("sponsor_name"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

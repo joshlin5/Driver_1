@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -144,7 +145,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         // Requests the location data and puts it on the queue
                         JsonObjectRequest request2 = new JsonObjectRequest
                                 (Request.Method.POST, url, body, response -> {
-                                    // Test for correct response?
+                                    Toast.makeText(getContext(), "Sponsor Application Sent", Toast.LENGTH_SHORT);
                                 }, error -> {}
                         );
                         mRequestQueue.add(request2);
@@ -152,7 +153,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // No action required if canceled
+                        Toast.makeText(getContext(), "Sponsor Application Canceled", Toast.LENGTH_SHORT);
                     }
                 });
 
