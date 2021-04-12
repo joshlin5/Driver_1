@@ -2,6 +2,7 @@ package com.example.driver_1.ui.store;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -56,7 +57,9 @@ public class StoreViewModel extends AndroidViewModel implements ASyncResponse {
 
     private void loadItems() {
 // can be launched in a separate asynchronous job
-        String url = "https://driver1-web-app.herokuapp.com/api/catalog/computer";
+        SharedPreferences prefs = this.getApplication().getApplicationContext().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        String s_id = prefs.getString("sponsor_id", "1");
+        String url = "https://driver1-web-app.herokuapp.com/api/catalog/" + "computer";
         Context c = getApplication().getApplicationContext();
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);

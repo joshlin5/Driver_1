@@ -14,7 +14,7 @@
         android:textSize="40sp"
         android:text="ERROR"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="itemImage"
+
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -22,8 +22,7 @@
         android:id="@+id/itemImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/itemName"
-        app:layout_constraintBottom_toTopOf="priceTextView"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />
@@ -35,8 +34,7 @@
         android:textAlignment="center"
         android:textSize="40sp"
         android:text="ERROR"
-        app:layout_constraintTop_toBottomOf="@id/itemImage"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemName"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
