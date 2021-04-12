@@ -121,10 +121,10 @@
         android:textSize="15sp"
         android:text="Qualifications: No Crashes, Voted Best Driver, 100 years of truck driving experience"
         app:layout_constraintTop_toBottomOf="@id/points"
-        app:layout_constraintBottom_toTopOf="@id/resetPassword"
+        app:layout_constraintBottom_toTopOf="@id/editProfile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
-
+<!--
     <Button
         android:id="@+id/resetPassword"
         android:layout_width="wrap_content"
@@ -136,6 +136,7 @@
         app:layout_constraintBottom_toTopOf="@id/editProfile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+        -->
 
     <Button
         android:id="@+id/editProfile"
@@ -144,7 +145,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/editProfileString"
-        app:layout_constraintTop_toBottomOf="@id/resetPassword"
+        app:layout_constraintTop_toBottomOf="@id/qualiTextView"
         app:layout_constraintBottom_toTopOf="@id/applyForSponsor"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

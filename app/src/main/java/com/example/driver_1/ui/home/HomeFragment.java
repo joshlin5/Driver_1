@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment{
     TextView usernameText, addressText, phoneNumberText, emailText, ageText, genderText, sponsorText, pointsText, qualiText;
     // Strings for the TextViews that need to be changed
     String username, address, phoneNumber, email, gender, sponsor, qualifications;
-    private RequestQueue mRequestQueue ;
+    private RequestQueue mRequestQueue;
     private final String SPONSOR_BASE_URL = "https://driver1-web-app.herokuapp.com/api/sponsors/";
 
     // Initializes Buttons and TextViews
@@ -87,13 +87,13 @@ public class HomeFragment extends Fragment{
 
         // Initialize the Buttons
         editProfileButton = root.findViewById(R.id.editProfile);
-        resetPasswordButton = root.findViewById(R.id.resetPassword);
+        //resetPasswordButton = root.findViewById(R.id.resetPassword);
         applySponsor = root.findViewById(R.id.applyForSponsor);
 
         // onCLick Listener for the resetPasswordButton
-        resetPasswordButton.setOnClickListener(v -> {
+        /*resetPasswordButton.setOnClickListener(v -> {
             // Do something in response to button click
-        });
+        });*/
 
         // onCLick Listener for the resetPasswordButton
         applySponsor.setOnClickListener(v -> new ApplySponsorFragment().show(getChildFragmentManager(), "Sponsor Application"));
