@@ -40,15 +40,7 @@ public class MainActivity extends AppCompatActivity implements StoreFragment.OnI
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
         SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         // Set the side drawer text fields
         NavigationView navigationView = findViewById(R.id.nav_view);

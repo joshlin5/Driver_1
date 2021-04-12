@@ -51,7 +51,7 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password, Context c) {
         // can be launched in a separate asynchronous job
-        String url = "https://driver1-web-app.herokuapp.com/api/fake_authenticate/";
+        String url = "https://driver1-web-app.herokuapp.com/api/authenticate/";
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
 
