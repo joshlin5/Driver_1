@@ -32,7 +32,7 @@ import org.json.JSONObject;
 public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // The EditText for the Dialog
     String driverId;
-    EditText username, address, phoneNumber, email, age, qualification;
+    EditText username, address, phoneNumber, age, qualification;
     Spinner gender;
     String genderResult = "Male";
     private RequestQueue mRequestQueue ;
@@ -64,7 +64,6 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         address = inflater.findViewById(R.id.addressEditText);
         phoneNumber = inflater.findViewById(R.id.phoneNumberEditText);
         qualification = inflater.findViewById(R.id.qualiEditText);
-        //email = inflater.findViewById(R.id.emailEditText);
         age = inflater.findViewById(R.id.ageEditText);
 
         gender = (Spinner) inflater.findViewById(R.id.genderChoice);
@@ -90,7 +89,6 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                             String addressInput = address.getText().toString();
                             String phoneNumberInput = phoneNumber.getText().toString();
                             String qualiInput = qualification.getText().toString();
-                            //String emailInput = email.getText().toString();
                             String ageInput = age.getText().toString();
                             if(!nameInput.equals("") && nameInput.length() > 0) {
                                 result.putString("username", nameInput);
@@ -122,32 +120,23 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                                 body.put("phone", prefs.getString("phoneNumber", "ERROR"));
                             }
 
-                            /*if(!emailInput.equals("") && emailInput.length() > 0) {
-                                result.putString("email", emailInput);
-                                editor.putString("phoneNumber", emailInput);
-                                //body.put("phone", emailInput);
-                            }
-                            else {
-                                result.putString("email", "");
-                                //body.put("phone", prefs.getString("phoneNumber", "ERROR"));
-                            }*/
-
                             // Not sync with pref file and web server
                             if(!ageInput.equals("") && ageInput.length() > 0) {
                                 result.putString("age", ageInput);
-                                //editor.putString("age", ageInput);
-                                //body.put("age", ageInput);
+                                editor.putString("age", ageInput);
+                                body.put("age", ageInput);
                             }
                             else {
                                 result.putString("age", "");
-                                //body.put("age", prefs.getString("age", "ERROR"));
+                                body.put("age", prefs.getString("age", "ERROR"));
                             }
 
                             // Not sync with pref file and web server
                             if(!qualiInput.equals("") && qualiInput.length() > 0) {
                                 result.putString("qualifications", qualiInput);
-                                //editor.putString("age", qualiInput);
+                                editor.putString("age", qualiInput);
                                 body.put("qualifications", qualiInput);
+                                body.put("driver_gender", genderResult);
                             }
                             else {
                                 result.putString("qualifications", "");
@@ -186,6 +175,6 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
 
 
     public void onNothingSelected(AdapterView<?> parent) {
-        //
+        // TODO: Implement Nothing
     }
 }

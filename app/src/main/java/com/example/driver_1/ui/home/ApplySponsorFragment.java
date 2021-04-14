@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.Vector;
 
 public class ApplySponsorFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
-    int sponsorSelectedId = 1;
+    int sponsorSelectedId = 1, driverId;
     Spinner sponsorSpinner;
     Button detailButton;
     List<JSONObject> sponsorList = new ArrayList<>();
@@ -78,6 +78,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_sponsor_application, (ViewGroup) getView(), false);
         prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        driverId = Integer.parseInt(prefs.getString("id", "ERROR"));
         detailButton = inflater.findViewById(R.id.sponsor_details);
         detailButton.setOnClickListener(v -> {
             Bundle data = new Bundle();
@@ -137,7 +138,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         JSONObject body = new JSONObject();
                         try {
                             //POST JSON body
-                            body.put("driver_id", prefs.getInt("id", 1));
+                            body.put("driver_id", driverId);
                             body.put("sponsor_id", sponsorSelectedId);
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -11,11 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,8 +38,9 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
-
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    String genderResult = "Male";
+    private final String AUTHENTICATE_BASE_URL = "https://driver1-web-app.herokuapp.com/api/authenticate/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +54,18 @@ public class RegisterActivity extends AppCompatActivity {
         EditText phoneNumber = this.findViewById(R.id.phoneNumberEditTextRegister);
         EditText email = this.findViewById(R.id.emailEditTextRegister);
         EditText age = this.findViewById(R.id.ageEditTextRegister);
+        EditText qualifications = this.findViewById(R.id.qualificationEditTextRegister);
         SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
-        //Spinner gender = this.findViewById(R.id.genderChoiceRegister);
-        //gender.setOnItemClickListener(this);
+
+        Spinner gender = (Spinner) this.findViewById(R.id.genderChoice);
+        gender.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-        //        R.array.genderOptions, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.genderOptions, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        //gender.setAdapter(adapter);
+        gender.setAdapter(adapter);
 
         // When the user has filled out registration and is ready to actually register. Need to add
         // checks to make sure all fields have been filled.
@@ -72,7 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
                 editor.putString("username", username.getText().toString());
                 editor.putString("address", address.getText().toString());
                 editor.putString("phoneNumber", phoneNumber.getText().toString());
-                editor.putInt("age", Integer.parseInt(age.getText().toString()));
+                editor.putString("age", age.getText().toString());
+                editor.putString("gender", genderResult);
+                editor.putString("qualifications", qualifications.getText().toString());
                 editor.apply();
                 registerCall(v.getContext(), password.getText().toString());
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
@@ -82,93 +89,72 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerCall(Context c, String pass) {
-        RequestQueue mRequestQueue ;
-        mRequestQueue = Volley.newRequestQueue(c);
+        RequestQueue mRequestQueue = Volley.newRequestQueue(c);
         // can be launched in a separate asynchronous job
         String url = "https://driver1-web-app.herokuapp.com/api/drivers/";
         SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         // Instantiate the RequestQueue.
-        // Getting data from the Edit Text and putting it in the Bundle
-        Bundle result = new Bundle();
         JSONObject body = new JSONObject();
         String username = prefs.getString("username", "failed");
         String address = prefs.getString("address", "failed");
         String phoneNumber = prefs.getString("phoneNumber", "failed");
+        String emailPost = prefs.getString("email", "ERROR");
+        String agePost = prefs.getString("age", "ERROR");
+        String genderPost = prefs.getString("gender", "ERROR");
         String qualification = "temp";
         try {
-            //String emailInput = email.getText().toString();
-            //String ageInput = age.getText().toString();
-            if (!username.equals("") && username.length() > 0) {
-                result.putString("username", username);
                 body.put("name", username);
-            } else {
-                result.putString("username", "");
-                body.put("name", prefs.getString("username", "ERROR"));
-            }
-
-            if (!address.equals("") && address.length() > 0) {
-                result.putString("address", address);
                 body.put("address", address);
-            } else {
-                result.putString("address", "");
-                body.put("address", prefs.getString("address", "ERROR"));
-            }
-
-            if (!phoneNumber.equals("") && phoneNumber.length() > 0) {
-                result.putString("phoneNumber", phoneNumber);
                 body.put("phone", phoneNumber);
-            } else {
-                result.putString("phoneNumber", "");
-                body.put("phone", prefs.getString("phoneNumber", "ERROR"));
-            }
-
-                            /*if(!emailInput.equals("") && emailInput.length() > 0) {
-                                result.putString("email", emailInput);
-                                editor.putString("phoneNumber", emailInput);
-                                //body.put("phone", emailInput);
-                            }
-                            else {
-                                result.putString("email", "");
-                                //body.put("phone", prefs.getString("phoneNumber", "ERROR"));
-                            }*/
-
-            // Not sync with pref file and web server
-            /*if (!ageInput.equals("") && ageInput.length() > 0) {
-                result.putString("age", ageInput);
-                //editor.putString("age", ageInput);
-                //body.put("age", ageInput);
-            } else {
-                result.putString("age", "");
-                //body.put("age", prefs.getString("age", "ERROR"));
-            }*/
-
-            // Not sync with pref file and web server
-            if (!qualification.equals("") && qualification.length() > 0) {
-                result.putString("qualifications", qualification);
-                //editor.putString("age", qualiInput);
+                body.put("email", emailPost);
+                body.put("password", pass);
+                body.put("age", agePost);
+                body.put("driver_gender", genderPost);
                 body.put("qualifications", qualification);
-            } else {
-                result.putString("qualifications", "");
-                body.put("qualifications", "None");
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        // Not sync with web server
-        //result.putString("gender", genderResult);
-
-
-        // Sending the data to the parent fragment (the HomeFragment.java)
-        //getParentFragmentManager().setFragmentResult("EditProfileResult", result);
-
-
         String driverUrl = Uri.parse(url).buildUpon().build().toString();
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.POST, driverUrl, body, response -> {
-                }, error -> {
-                });
+                    Toast.makeText(this, "Sending Registration Data...", Toast.LENGTH_SHORT);
+                }, error -> {});
         mRequestQueue.add(request);
+
+        // Make another authenticate request to get driver id
+        url = Uri.parse(AUTHENTICATE_BASE_URL).buildUpon().build().toString();
+        JSONObject body2 = new JSONObject();
+        try {
+            //POST JSON body
+            body2.put("email", emailPost);
+            body2.put("password", pass);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // Requests the data and puts it on the queue
+        JsonObjectRequest request2 = new JsonObjectRequest
+                (Request.Method.POST, url, body, response -> {
+                    try {
+                        editor.putString("id", response.getString("id"));
+                        editor.putString("sponsor", null);
+                        editor.putInt("points", 0);
+                        editor.apply();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {}
+                );
+        mRequestQueue.add(request2);
     }
 
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        genderResult = (String) parent.getItemAtPosition(position);
+    }
+
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO: Implement Nothing
+    }
 }

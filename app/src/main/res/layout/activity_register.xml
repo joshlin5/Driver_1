@@ -81,6 +81,17 @@
         android:textSize="20sp"
         android:text="@string/age"
         app:layout_constraintTop_toBottomOf="@id/emailTextViewRegister"
+        app:layout_constraintBottom_toTopOf="@id/qualificationTextViewRegister"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/qualificationTextViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Qualifications: "
+        app:layout_constraintTop_toBottomOf="@id/ageTextViewRegister"
         app:layout_constraintBottom_toTopOf="@id/genderTextViewRegister"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -91,7 +102,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:text="@string/genderTextView"
-        app:layout_constraintTop_toBottomOf="@id/ageTextViewRegister"
+        app:layout_constraintTop_toBottomOf="@id/qualificationTextViewRegister"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -161,6 +172,17 @@
         app:layout_constraintBaseline_toBaselineOf="@id/ageTextViewRegister"
         app:layout_constraintLeft_toRightOf="@id/ageTextViewRegister"/>
 
+    <EditText
+        android:id="@+id/qualificationEditTextRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:hint="I can drive"
+        android:inputType="text"
+        app:layout_constraintBaseline_toBaselineOf="@id/qualificationTextViewRegister"
+        app:layout_constraintLeft_toRightOf="@id/qualificationTextViewRegister"/>
+
     <Spinner
         android:id="@+id/genderChoiceRegister"
         android:layout_width="wrap_content"
@@ -179,7 +201,6 @@
         android:layout_marginBottom="20dp"
         android:enabled="true"
         android:text="@string/register"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

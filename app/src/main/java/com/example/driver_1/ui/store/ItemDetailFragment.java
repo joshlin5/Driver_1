@@ -35,7 +35,7 @@ public class ItemDetailFragment extends DialogFragment{
     TextView nameText, priceText;
     ImageView itemImage;
     SharedPreferences prefs;
-    private final String PRUCHASE_BASE_URL = "https://driver1-web-app.herokuapp.com/api/purchase/";
+    private final String PURCHASE_BASE_URL = "https://driver1-web-app.herokuapp.com/api/purchase/";
     // Sends the fetch request to the main thread
     private RequestQueue mRequestQueue ;
 
@@ -64,7 +64,7 @@ public class ItemDetailFragment extends DialogFragment{
                 .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        String url = Uri.parse(PRUCHASE_BASE_URL).buildUpon().build().toString();
+                        String url = Uri.parse(PURCHASE_BASE_URL).buildUpon().build().toString();
                         JSONObject body = new JSONObject();
                         try {
                             //POST JSON body

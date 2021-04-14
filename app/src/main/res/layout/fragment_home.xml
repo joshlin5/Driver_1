@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:text="Sponsor Company: None"
+        android:text="Sponsor: None"
         app:layout_constraintTop_toBottomOf="@id/genderTextView"
         app:layout_constraintBottom_toTopOf="@id/points"
         app:layout_constraintLeft_toLeftOf="parent"

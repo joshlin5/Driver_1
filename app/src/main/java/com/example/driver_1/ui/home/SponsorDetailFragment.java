@@ -14,8 +14,6 @@ import com.example.driver_1.R;
 
 public class SponsorDetailFragment extends DialogFragment {
     int sponsorId;
-    String sponsorName = "Bob";
-    int exchangeRate = 1;
     TextView nameText, exchangeText;
 
     @Override
