@@ -89,7 +89,7 @@ public class ItemDetailFragment extends DialogFragment{
                         JSONObject body = new JSONObject();
                         try {
                             //POST JSON body
-                            body.put("driver_id", prefs.getInt("id", 1));
+                            body.put("driver_id", String.valueOf(prefs.getString("id", "ERROR")));
                             body.put("item_id", itemId);
                             body.put("cost", itemPrice);
                         } catch (JSONException e) {
