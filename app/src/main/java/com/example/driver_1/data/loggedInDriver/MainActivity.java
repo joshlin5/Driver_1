@@ -19,12 +19,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.driver_1.R;
 import com.example.driver_1.ui.login.LoginActivity;
-import com.example.driver_1.ui.store.StoreFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.driver_1.ui.store.CategoryFragment;
+import com.example.driver_1.ui.store.StoreActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements StoreFragment.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements CategoryFragment.OnItemSelectedListener {
     /**
      * @pre app is opened
      * @param savedInstanceState reloads the app if it was closed
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements StoreFragment.OnI
      */
 
     private AppBarConfiguration mAppBarConfiguration;
-    private int mItemId;
+    private String mItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,27 +84,27 @@ public class MainActivity extends AppCompatActivity implements StoreFragment.OnI
     }
 
     /** Adapted from ZyBooks band app
-     * @pre the book list has been created and contains valid books
+     * @pre the item list has been created and contains valid books
      * @pre the selected book has valid info
-     * @param bookId the key that corresponds to the book being called
+     * @param itemId the key that corresponds to the item being called
      * @post the transition/creation of the details fragment begins
      */
     @Override
-    public void onItemSelected(int bookId) {
+    public void onItemSelected(String itemId) {
 
-        mItemId = bookId;
 
-        /*if (findViewById(R.id.details_fragment_container) == null) {
+        mItemId = itemId;
+        if (findViewById(R.id.store_fragment_container) == null) {
             // Must be in portrait, so start activity
-            Intent intent = new Intent(this, DetailsActivity.class);
-            intent.putExtra(DetailsActivity.EXTRA_BOOK_ID, bookId);
+            Intent intent = new Intent(this, StoreActivity.class);
+            intent.putExtra(StoreActivity.SEARCH_TERM, itemId);
             startActivity(intent);
         } else {
-            // Replace previous fragment (if one exists) with a new fragment
-            Fragment bookFragment = com.example.lendinglibrary.ui.details.DetailsFragment.newInstance(bookId);
+            Fragment StoreFragment = com.example.driver_1.ui.store.StoreFragment.newInstance(itemId);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, bookFragment)
+                    .replace(R.id.store_fragment_container, StoreFragment)
                     .commit();
-        }*/
+        }
     }
+
 }

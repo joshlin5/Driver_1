@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.recyclerview.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/store_recycler_view"
+    android:id="@+id/list"
+    android:name="com.example.driver_1.ui.store.CategoryFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-</androidx.recyclerview.widget.RecyclerView>
+    android:layout_height="match_parent" />
