@@ -37,16 +37,8 @@ public class StoreActivity extends AppCompatActivity implements StoreFragment.On
 
     @Override
     public void onItemSelected(Item item) {
-        if (findViewById(R.id.store_fragment_container) == null) {
-            // Must be in portrait, so start activity
-            Intent intent = new Intent(this, StoreActivity.class);
-            startActivity(intent);
-        } else {
-            Fragment StoreFragment = com.example.driver_1.ui.store.ItemDetailFragment.newInstance(item);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.store_fragment_container, StoreFragment)
-                    .commit();
-        }
+
+
     }
 
 }

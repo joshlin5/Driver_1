@@ -11,11 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Driver_1.NoActionBar">
-        <activity android:name=".ui.store.PurchaseActivity"></activity>
         <activity
             android:name=".ui.store.StoreActivity"
             android:label="@string/title_activity_store"
-            android:theme="@style/Theme.Driver_1.NoActionBar"></activity>
+            android:theme="@style/Theme.Driver_1.NoActionBar" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity
             android:name=".data.loggedInDriver.MainActivity"

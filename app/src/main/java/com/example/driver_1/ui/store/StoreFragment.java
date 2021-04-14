@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -39,7 +40,7 @@ public class StoreFragment extends Fragment  {
 
     /** Adapted from ZyBooks band app
      * @pre the app has started and a book database has been set up, with cities initialized
-     * @param bookId is the integer key corresponding to the book being requested
+     * @param searchTerm is the integer key corresponding to the category being requested
      * @return a fragment that can have book details created in it
      * @post a new details fragment is created
      */
@@ -115,7 +116,6 @@ public class StoreFragment extends Fragment  {
          */
         public void bind(Item item) {
             mItem = item;
-            //mItem.setTxt(mItemPic);
             mNameTextView.setText(item.getName());
             mItemPic.setImageDrawable(item.getImage());
         }
@@ -129,7 +129,9 @@ public class StoreFragment extends Fragment  {
         @Override
         public void onClick(View view) {
             // Tell ListActivity what item was clicked
-            mListener.onItemSelected(mItem);
+            // Create the fragment and show it as a dialog.
+            DialogFragment newFragment = (DialogFragment) ItemDetailFragment.newInstance(mItem);
+            newFragment.show(getParentFragmentManager(), "dialog");
         }
     }
 

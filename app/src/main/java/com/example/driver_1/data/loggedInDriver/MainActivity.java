@@ -75,10 +75,6 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
 
     public void onClick(MenuItem item) {
 
-        /*FragmentManager manager = getFragmentManager();
-        LogoutFragmentDialog dialog = new LogoutFragmentDialog();
-        dialog.show(manager, "logoutFragmentDialog");*/
-
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }

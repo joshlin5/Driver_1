@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
 // Gets a JSON Object of item to display
 // Ask user whether you want to buy it or not
@@ -37,16 +38,15 @@ import java.io.ByteArrayOutputStream;
 // Send to API request for purchase, pass in driverId, ItemId, and item price
 public class ItemDetailFragment extends DialogFragment{
     String itemName, itemUrl;
-    int driverPoints, itemId, itemPrice, sponsorId;
+    Integer driverPoints, itemId, itemPrice, sponsorId;
     TextView nameText, priceText;
-    ImageView itemImage;
     SharedPreferences prefs;
     private final String PURCHASE_BASE_URL = "https://driver1-web-app.herokuapp.com/api/purchase/";
     // Sends the fetch request to the main thread
     private RequestQueue mRequestQueue ;
 
     public static Fragment newInstance(Item item) {
-        com.example.driver_1.ui.store.StoreFragment fragment = new com.example.driver_1.ui.store.StoreFragment();
+        com.example.driver_1.ui.store.ItemDetailFragment fragment = new com.example.driver_1.ui.store.ItemDetailFragment();
         Bundle args = new Bundle();
         args.putInt("id", item.getId());
         args.putString("name", item.getName());
@@ -58,21 +58,26 @@ public class ItemDetailFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Making a new dialog fragment
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.requireContext());
         builder.setTitle("Buy Item?");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_detail, (ViewGroup) getView(), false);
-        prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        prefs = this.requireActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         driverPoints = prefs.getInt("points", -1);
         nameText = inflater.findViewById(R.id.itemName);
         priceText = inflater.findViewById(R.id.priceTextView);
-        itemImage = inflater.findViewById(R.id.itemImage);
-        getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {
+        itemName = this.getArguments().getString("name");
+        itemId = this.getArguments().getInt("id");
+        itemPrice = (int) this.getArguments().getDouble("price");
+        nameText.setText(itemName);
+        priceText.setText(Double.toString(this.getArguments().getDouble("price")));
+
+        /*getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {
             itemName = bundle.getString("name");
             itemId = bundle.getInt("id");
             itemUrl = bundle.getString("url");
             itemPrice = (int) bundle.getDouble("price");
-        });
+        });*/
         mRequestQueue = Volley.newRequestQueue(getContext());
 
         // Creating the "OK" and "Cancel" buttons
