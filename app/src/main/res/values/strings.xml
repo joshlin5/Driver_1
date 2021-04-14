@@ -78,4 +78,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="menu_categories">Categories</string>
+    <string name="storePrice">0</string>
 </resources>

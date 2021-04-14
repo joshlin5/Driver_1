@@ -92,6 +92,7 @@ public class StoreFragment extends Fragment  {
         private Item mItem;
 
         private TextView mNameTextView;
+        private TextView mPriceTextView;
         private ImageView mItemPic;
 
         /** Adapted from ZyBooks band app
@@ -105,6 +106,7 @@ public class StoreFragment extends Fragment  {
             super(inflater.inflate(R.layout.item_list_store, parent, false));
             itemView.setOnClickListener(this);
             mNameTextView = (TextView) itemView.findViewById(R.id.storeName);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.storePrice);
             mItemPic = (ImageView) itemView.findViewById(R.id.storePic);
         }
 
@@ -117,6 +119,7 @@ public class StoreFragment extends Fragment  {
         public void bind(Item item) {
             mItem = item;
             mNameTextView.setText(item.getName());
+            mPriceTextView.setText(Double.toString(item.getPrice()));
             mItemPic.setImageDrawable(item.getImage());
         }
 
