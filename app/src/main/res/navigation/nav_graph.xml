@@ -10,12 +10,12 @@
         android:name="com.example.driver_1.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
-        android:id="@+id/nav_store"
-        android:name="com.example.driver_1.ui.store.StoreFragment"
-        android:label="@string/menu_store"
-        tools:layout="@layout/fragment_store" />
+        android:id="@+id/nav_sponsor"
+        android:name="com.example.driver_1.ui.home.SponsorDetailFragment"
+        android:label="@string/menu_sponsor"
+        tools:layout="@layout/fragment_sponsor_detail" />
+
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.driver_1.ui.login.LoginActivity"
@@ -27,5 +27,17 @@
         android:name="com.example.driver_1.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_categories"
+        android:name="com.example.driver_1.ui.store.CategoryFragment"
+        android:label="@string/menu_categories"
+        tools:layout="@layout/fragment_category_list" />
+    <fragment
+        android:id="@+id/nav_store"
+        android:name="com.example.driver_1.ui.store.StoreFragment"
+        android:label="@string/menu_store"
+        android:layout="@layout/fragment_store" />
+
+
 
 </navigation>

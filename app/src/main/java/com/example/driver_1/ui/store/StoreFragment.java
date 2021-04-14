@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,26 +24,44 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.driver_1.R;
 import com.example.driver_1.data.store.Item;
 import com.example.driver_1.data.store.ItemDatabase;
+import com.google.android.material.internal.TextWatcherAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StoreFragment extends Fragment {
+public class StoreFragment extends Fragment  {
 
     private final String TAG = "StoreFragment";
     private StoreViewModel storeViewModel;
+    private String searchTerm;
+
+    /** Adapted from ZyBooks band app
+     * @pre the app has started and a book database has been set up, with cities initialized
+     * @param bookId is the integer key corresponding to the book being requested
+     * @return a fragment that can have book details created in it
+     * @post a new details fragment is created
+     */
+    public static com.example.driver_1.ui.store.StoreFragment newInstance(String searchTerm) {
+        com.example.driver_1.ui.store.StoreFragment fragment = new com.example.driver_1.ui.store.StoreFragment();
+        Bundle args = new Bundle();
+        args.putString("searchTerm", searchTerm);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        assert getArguments() != null;
+        searchTerm = getArguments().getString("searchTerm");
         storeViewModel =
                 new ViewModelProvider(this).get(StoreViewModel.class);
         View root = inflater.inflate(R.layout.fragment_store, container, false);
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.store_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        TextView t = root.findViewById(R.id.storeName);
 
-        storeViewModel.getItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
+        storeViewModel.getItems(searchTerm).observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
             @Override
             public void onChanged(List<Item> items) {
                 // Send Items to recycler view
@@ -51,6 +72,7 @@ public class StoreFragment extends Fragment {
 
         return root;
     }
+
 
     // For the activity to implement
     public interface OnItemSelectedListener {

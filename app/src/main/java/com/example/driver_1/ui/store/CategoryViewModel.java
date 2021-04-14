@@ -3,18 +3,12 @@ package com.example.driver_1.ui.store;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,11 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.driver_1.R;
-import com.example.driver_1.data.ASyncResponse;
-//import com.example.driver_1.data.RetrieveCategory;
-import com.example.driver_1.data.RetrieveItem;
-import com.example.driver_1.data.store.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,43 +25,38 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreViewModel extends AndroidViewModel implements ASyncResponse {
-    private List<RetrieveItem> asyncTask;
-    //private List<RetrieveCategory> asyncTask2;
-    private final String TAG = "StoreViewModel";
-    private MutableLiveData<List<Item>> items;
+public class CategoryViewModel extends AndroidViewModel {
 
-    private List<Item> mItems;
+    private String TAG = "CategoryViewModel";
+    private List<String> mCats;
+    private MutableLiveData<List<String>> categories;
 
-
-    public StoreViewModel(@NonNull Application application) {
+    public CategoryViewModel(@NonNull Application application) {
         super(application);
-        asyncTask = new ArrayList<>();
-        //asyncTask2 = new ArrayList<>();
-        //this to set delegate/listener back to this class
-        //asyncTask.delegate = this;
-        mItems = new ArrayList<>();
+
+        mCats = new ArrayList<>();
     }
 
-
-
-    public LiveData<List<Item>> getItems(String search) {
-        if (items == null) {
-            items = new MutableLiveData<List<Item>>();
-            loadItems(search);
+    public LiveData<List<String>> getCats() {
+        if(categories == null){
+            categories = new MutableLiveData<List<String>>();
+            loadCategories();
         }
-        return items;
+        return categories;
     }
 
-
-
-    private void loadItems(String search) {
-// can be launched in a separate asynchronous job
+    /**
+     * Loads possible search categories from API call
+     */
+    public void loadCategories() {
+        // can be launched in a separate asynchronous job
         SharedPreferences prefs = this.getApplication().getApplicationContext().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
-        String url = "https://driver1-web-app.herokuapp.com/api/catalog/" + search;
+        String s_id = prefs.getString("sponsor_id", "1");
+        String url = "https://driver1-web-app.herokuapp.com/api/catalog_params/" + s_id;
         Context c = getApplication().getApplicationContext();
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(c);
+
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -88,10 +72,9 @@ public class StoreViewModel extends AndroidViewModel implements ASyncResponse {
                             JSONArray jArray = obj.getJSONArray("response");
                             for (int i=0;i<jArray.length();i++){
                                 //Log.d(TAG, jArray.getString(i));
-                                imageGet(new Pair<>(new JSONObject(jArray.getString(i)).getString("imageURL"), i));
-                                mItems.add(new Item(jArray.getString(i)));
+                                mCats.add(jArray.getString(i));
                             }
-                            items.postValue(mItems);
+                            categories.postValue(mCats);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -109,26 +92,5 @@ public class StoreViewModel extends AndroidViewModel implements ASyncResponse {
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-    }
-
-    private void imageGet(Pair<String, Integer> p) {
-        asyncTask.add(new RetrieveItem());
-        asyncTask.get(p.second).delegate = this;
-        asyncTask.get(p.second).execute(p);
-    }
-
-    public LiveData<String> getText() {
-        return new LiveData<String>() {
-            @Override
-            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super String> observer) {
-                super.observe(owner, observer);
-            }
-        };
-    }
-
-    @Override
-    public void processFinish(Pair<Drawable, Integer> output) {
-        mItems.get(output.second).setImage(output.first);
-        items.postValue(mItems);
     }
 }
