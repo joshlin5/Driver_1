@@ -76,7 +76,7 @@ public class StoreFragment extends Fragment  {
 
     // For the activity to implement
     public interface OnItemSelectedListener {
-        void onItemSelected(int ItemId);
+        void onItemSelected(Item item);
     }
 
     // Reference to the activity
@@ -129,7 +129,7 @@ public class StoreFragment extends Fragment  {
         @Override
         public void onClick(View view) {
             // Tell ListActivity what item was clicked
-            mListener.onItemSelected(mItem.getId());
+            mListener.onItemSelected(mItem);
         }
     }
 

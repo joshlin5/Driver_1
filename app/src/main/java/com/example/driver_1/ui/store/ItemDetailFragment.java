@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +17,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.driver_1.R;
+import com.example.driver_1.data.store.Item;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 // Gets a JSON Object of item to display
 // Ask user whether you want to buy it or not
@@ -38,6 +44,16 @@ public class ItemDetailFragment extends DialogFragment{
     private final String PURCHASE_BASE_URL = "https://driver1-web-app.herokuapp.com/api/purchase/";
     // Sends the fetch request to the main thread
     private RequestQueue mRequestQueue ;
+
+    public static Fragment newInstance(Item item) {
+        com.example.driver_1.ui.store.StoreFragment fragment = new com.example.driver_1.ui.store.StoreFragment();
+        Bundle args = new Bundle();
+        args.putInt("id", item.getId());
+        args.putString("name", item.getName());
+        args.putDouble("price", item.getPrice());
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -55,7 +71,7 @@ public class ItemDetailFragment extends DialogFragment{
             itemName = bundle.getString("name");
             itemId = bundle.getInt("id");
             itemUrl = bundle.getString("url");
-            itemPrice = bundle.getInt("price");
+            itemPrice = (int) bundle.getDouble("price");
         });
         mRequestQueue = Volley.newRequestQueue(getContext());
 

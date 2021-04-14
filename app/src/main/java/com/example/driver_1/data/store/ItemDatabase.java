@@ -31,7 +31,7 @@ public class ItemDatabase {
 
         for (int i = 0; i < items.length; i++) {
             mItems.add(new com.example.driver_1.data.store
-                    .Item(i + 1, items[i], context));
+                    .Item(i + 1, items[i], 0.0));
         }
     }
 

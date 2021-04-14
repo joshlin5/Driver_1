@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
      */
     @Override
     public void onItemSelected(String itemId) {
-
-
         mItemId = itemId;
         if (findViewById(R.id.store_fragment_container) == null) {
             // Must be in portrait, so start activity
