@@ -1,4 +1,4 @@
-// Joshua Lin C15684772 jlin5@g.clemson.edu
+ // Joshua Lin C15684772 jlin5@g.clemson.edu
 // Code referenced from Zybooks: Mobile App Development, official Java Documentation (Oracle), and official Android documentation
 
 package com.example.driver_1.ui.home;
@@ -139,7 +139,9 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         try {
                             //POST JSON body
                             body.put("driver_id", driverId);
+                            System.out.println("DRIVER ID " + driverId);
                             body.put("sponsor_id", sponsorSelectedId);
+                            System.out.println("SPONSOR ID " + sponsorSelectedId);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -163,7 +165,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        sponsorSelectedId = (int) id;
+        sponsorSelectedId = (int) id + 1;
     }
 
     @Override
