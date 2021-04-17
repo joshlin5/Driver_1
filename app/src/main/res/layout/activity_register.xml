@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:hint="I can drive"
+        android:hint="@string/i_can_drive"
         android:inputType="text"
         app:layout_constraintBaseline_toBaselineOf="@id/qualificationTextViewRegister"
         app:layout_constraintLeft_toRightOf="@id/qualificationTextViewRegister"/>

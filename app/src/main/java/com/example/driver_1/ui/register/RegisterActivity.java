@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String emailPost = prefs.getString("email", "ERROR");
         String agePost = prefs.getString("age", "ERROR");
         String genderPost = prefs.getString("gender", "ERROR");
-        String qualification = "temp";
+        String qualification = prefs.getString("qualifications", "ERROR");
         try {
                 body.put("name", username);
                 body.put("address", address);

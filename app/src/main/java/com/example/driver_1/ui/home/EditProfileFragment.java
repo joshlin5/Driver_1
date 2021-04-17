@@ -134,9 +134,8 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                             // Not sync with pref file and web server
                             if(!qualiInput.equals("") && qualiInput.length() > 0) {
                                 result.putString("qualifications", qualiInput);
-                                editor.putString("age", qualiInput);
+                                editor.putString("qualifications", qualiInput);
                                 body.put("qualifications", qualiInput);
-                                body.put("driver_gender", genderResult);
                             }
                             else {
                                 result.putString("qualifications", "");

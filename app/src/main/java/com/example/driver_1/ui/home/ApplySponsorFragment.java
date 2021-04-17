@@ -42,6 +42,7 @@ import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Vector;
 
 public class ApplySponsorFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
@@ -148,15 +149,17 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                         // Requests the location data and puts it on the queue
                         JsonObjectRequest request2 = new JsonObjectRequest
                                 (Request.Method.POST, url, body, response -> {
-                                    Toast.makeText(getContext(), "Sponsor Application Sent", Toast.LENGTH_SHORT);
-                                }, error -> {}
+                                    Toast.makeText(requireActivity().getApplicationContext(), "Sponsor Application Sent", Toast.LENGTH_SHORT);
+                                }, error -> {
+                                    Log.d("error", "error");
+                                }
                         );
                         mRequestQueue.add(request2);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "Sponsor Application Canceled", Toast.LENGTH_SHORT);
+                        Toast.makeText(requireActivity().getApplicationContext(), "Sponsor Application Canceled", Toast.LENGTH_SHORT);
                     }
                 });
 
