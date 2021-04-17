@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         EditText qualifications = this.findViewById(R.id.qualificationEditTextRegister);
         SharedPreferences prefs = getSharedPreferences("myPrefs.xml", MODE_PRIVATE);
 
-        Spinner gender = (Spinner) this.findViewById(R.id.genderChoice);
+        Spinner gender = (Spinner) this.findViewById(R.id.genderChoiceRegister);
         gender.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
