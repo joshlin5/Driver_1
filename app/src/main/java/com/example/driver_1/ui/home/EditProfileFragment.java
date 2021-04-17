@@ -34,7 +34,7 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
     String driverId;
     EditText username, address, phoneNumber, age, qualification;
     Spinner gender;
-    String genderResult = "Male";
+    String genderResult = "";
     private RequestQueue mRequestQueue ;
     private final String DRIVER_BASE_URL = "https://driver1-web-app.herokuapp.com/api/drivers/";
 
@@ -136,19 +136,21 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                                 result.putString("qualifications", qualiInput);
                                 editor.putString("age", qualiInput);
                                 body.put("qualifications", qualiInput);
-                                body.put("driver_gender", genderResult);
                             }
                             else {
                                 result.putString("qualifications", "");
-                                body.put("qualifications", "None");
+                            }
+                            if(genderResult.equals("None")) {
+                                result.putString("gender", "");
+                            }
+                            else {
+                                result.putString("gender", genderResult);
+                                editor.putString("gender", genderResult);
+                                body.put("driver_gender", genderResult);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        // Not sync with web server
-                        result.putString("gender", genderResult);
-                        editor.putString("gender", genderResult);
 
                         // Sending the data to the parent fragment (the HomeFragment.java)
                         getParentFragmentManager().setFragmentResult("EditProfileResult", result);
@@ -175,6 +177,6 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
 
 
     public void onNothingSelected(AdapterView<?> parent) {
-        // TODO: Implement Nothing
+        genderResult = "None";
     }
 }

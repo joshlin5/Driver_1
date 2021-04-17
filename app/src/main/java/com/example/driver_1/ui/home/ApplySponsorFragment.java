@@ -140,15 +140,15 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                             //POST JSON body
                             body.put("driver_id", driverId);
                             System.out.println("DRIVER ID " + driverId);
-                            body.put("sponsor_id", sponsorSelectedId);
-                            System.out.println("SPONSOR ID " + sponsorSelectedId);
+                            body.put("sponsor_id", (sponsorSelectedId + 1));
+                            System.out.println("SPONSOR ID " + sponsorSelectedId + 1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         // Requests the location data and puts it on the queue
                         JsonObjectRequest request2 = new JsonObjectRequest
                                 (Request.Method.POST, url, body, response -> {
-                                    Toast.makeText(getContext(), "Sponsor Application Sent", Toast.LENGTH_SHORT);
+                                    //Toast.makeText(getContext(), "Sponsor Application Sent", Toast.LENGTH_SHORT);
                                 }, error -> {}
                         );
                         mRequestQueue.add(request2);
@@ -156,7 +156,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "Sponsor Application Canceled", Toast.LENGTH_SHORT);
+                        //Toast.makeText(getContext(), "Sponsor Application Canceled", Toast.LENGTH_SHORT);
                     }
                 });
 
@@ -165,7 +165,7 @@ public class ApplySponsorFragment extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        sponsorSelectedId = (int) id + 1;
+        sponsorSelectedId = (int) id;
     }
 
     @Override

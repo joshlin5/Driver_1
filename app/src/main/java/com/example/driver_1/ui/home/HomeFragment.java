@@ -122,6 +122,8 @@ public class HomeFragment extends Fragment{
             }
             if(!qualifications.equals(""))
                 qualiText.setText("Qualifications: " + qualifications);
+            if(!qualifications.equals(""))
+                qualiText.setText("Qualifications: " + qualifications);
             genderText.setText("Gender: " + gender);
         });
         return root;
