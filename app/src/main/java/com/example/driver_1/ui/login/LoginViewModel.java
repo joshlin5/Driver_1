@@ -85,8 +85,7 @@ public class LoginViewModel extends ViewModel {
                         System.out.println("ADDRESS: " + obj.getString("address"));
                         editor.putString("phoneNumber", obj.getString("phone"));
                         System.out.println("PHONE NUMBER: " + obj.getString("phone"));
-                        //editor.putString("age", temp.getString("age"));
-                        editor.putString("age", "30");
+                        editor.putString("age", "22");
                         if(obj.isNull( "sponsor") || obj.equals(JSONObject.NULL)) {
                             editor.putString("sponsor", null);
                         }
