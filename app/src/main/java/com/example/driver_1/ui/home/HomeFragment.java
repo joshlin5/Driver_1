@@ -124,7 +124,8 @@ public class HomeFragment extends Fragment{
                 qualiText.setText("Qualifications: " + qualifications);
             if(!qualifications.equals(""))
                 qualiText.setText("Qualifications: " + qualifications);
-            genderText.setText("Gender: " + gender);
+            if(!gender.equals(""))
+                genderText.setText("Gender: " + gender);
         });
         return root;
     }

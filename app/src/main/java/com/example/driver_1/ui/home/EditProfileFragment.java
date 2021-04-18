@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,13 +30,16 @@ import com.example.driver_1.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditProfileFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
+public class EditProfileFragment extends DialogFragment{
     // The EditText for the Dialog
     String driverId;
     EditText username, address, phoneNumber, age, qualification;
     Spinner gender;
-    String genderResult = "";
+    String genderResult = "None";
+    String originalGender;
     private RequestQueue mRequestQueue ;
+    SharedPreferences prefs;
+    boolean isSpinnerTouched = false;
     private final String DRIVER_BASE_URL = "https://driver1-web-app.herokuapp.com/api/drivers/";
 
     /**
@@ -55,8 +59,9 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         builder.setTitle("Edit Profile");
         // Using fragment_edit_profile.xml to make the dialog
         View inflater = LayoutInflater.from(getContext()).inflate(R.layout.fragment_edit_profile, (ViewGroup) getView(), false);
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
+        prefs = this.getActivity().getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+        originalGender = prefs.getString("gender", "ERROR");
         driverId = prefs.getString("id", "ERROR");
         mRequestQueue = Volley.newRequestQueue(getContext());
         // The Edit Text that I need to get the changed data from
@@ -67,7 +72,6 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         age = inflater.findViewById(R.id.ageEditText);
 
         gender = (Spinner) inflater.findViewById(R.id.genderChoice);
-        gender.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.genderOptions, android.R.layout.simple_spinner_item);
@@ -75,6 +79,27 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         gender.setAdapter(adapter);
+
+        gender.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
+            }
+        });
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isSpinnerTouched)
+                    genderResult = (String) parent.getItemAtPosition(position);
+                // do what you want
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                genderResult = prefs.getString("gender", "ERROR");
+            }
+        });
 
         // Creating the "OK" and "Cancel" buttons
         builder.setView(inflater)
@@ -168,15 +193,5 @@ public class EditProfileFragment extends DialogFragment implements AdapterView.O
                     }
                 });
         return builder.create();
-    }
-
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        genderResult = (String) parent.getItemAtPosition(position);
-    }
-
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        genderResult = "None";
     }
 }
