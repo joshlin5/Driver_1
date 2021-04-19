@@ -74,6 +74,7 @@ public class LoginViewModel extends ViewModel {
 
                     SharedPreferences prefs = c.getSharedPreferences("myPrefs.xml", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
+                    editor.clear();
                     editor.putString("email", username);
                     try {
                         JSONObject obj = response.getJSONObject("response");

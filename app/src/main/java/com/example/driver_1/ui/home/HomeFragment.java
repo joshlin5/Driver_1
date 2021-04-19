@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment{
         driverID = Integer.valueOf(prefs.getString("id", "-1"));
         String sponsorString = prefs.getString("sponsor", "-1");
         Toast.makeText(getContext(), sponsorString, Toast.LENGTH_SHORT);
-        if(sponsorString.equals(null) || sponsorString.equals("-1") || sponsorString.equals("")) {
+        if(sponsorString.equals("")) {
             sponsorText.setText("Sponsor: None");
         }
         else {
@@ -120,8 +120,6 @@ public class HomeFragment extends Fragment{
             if(!age.equals("")) {
                 ageText.setText("Age: " + age);
             }
-            if(!qualifications.equals(""))
-                qualiText.setText("Qualifications: " + qualifications);
             if(!qualifications.equals(""))
                 qualiText.setText("Qualifications: " + qualifications);
             if(!gender.equals(""))

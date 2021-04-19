@@ -73,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
                 editor.putString("email", email.getText().toString());
                 editor.putString("username", username.getText().toString());
                 editor.putString("address", address.getText().toString());
