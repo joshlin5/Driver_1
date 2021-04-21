@@ -5,4 +5,5 @@ Download Android Studio. Import code into Android Studio from this GitHub page. 
 
 Driver credentials:
 email: stop@gmail.com
+
 Password: pass5
