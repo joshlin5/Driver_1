@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment{
         genderText = root.findViewById(R.id.genderTextView);
         genderText.setText("Gender: " + prefs.getString("gender", "ERROR"));
         pointsText = root.findViewById(R.id.points);
-        points = prefs.getInt("points", -1);
+        points = prefs.getInt("points", 0);
         pointsText.setText("Points: " + String.valueOf(prefs.getInt("points", -1)));
         sponsorText = root.findViewById(R.id.sponsor);
 
